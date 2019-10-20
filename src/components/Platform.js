@@ -1,6 +1,6 @@
 import React from "react";
 import Login from "../pages/Login";
-import { Router } from 'react-chrome-extension-router';
+import {Router} from "react-chrome-extension-router";
 
 function Platform() {
   return (
@@ -12,4 +12,4 @@ function Platform() {
 
 export default Platform;
 
-      // <Navbar />
+// <Navbar />

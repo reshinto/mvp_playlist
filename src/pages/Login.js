@@ -1,65 +1,66 @@
 import React from "react";
-import { connect } from "react-redux";
-import { getInfo } from "../redux/actions/authAction";
-import { goTo } from 'react-chrome-extension-router';
-import Test from "./Test";
-// import Button from "@material-ui/core/Button";
-// import DialogActions from "@material-ui/core/DialogActions";
-// import DialogContent from "@material-ui/core/DialogContent";
-// import TextField from "@material-ui/core/TextField";
-// import Visibility from "@material-ui/icons/Visibility";
-// import VisibilityOff from "@material-ui/icons/VisibilityOff";
-// import IconButton from "@material-ui/core/IconButton";
-// import InputAdornment from "@material-ui/core/InputAdornment";
-// import { db } from "../redux/utility";
+import {goTo} from "react-chrome-extension-router";
+import Register from "./Register";
+import LoginForm from "../components/forms/LoginForm";
 
-class LoginForm extends React.Component {
-  // state = {
-  //   username: "",
-  //   password: "",
-  //   showPassword: false
-  // };
-
-  // handleSubmit = e => {
-  //   e.preventDefault();
-  //   this.props.login(this.state.username, this.state.password);
-  //   // this.props.history.push("/");
-  // };
-
-  // onChange = prop => e => this.setState({ [prop]: e.target.value });
-
-  // handleClickShowPassword = () => {
-  //   this.setState(state => ({ showPassword: !state.showPassword }));
-  // };
-  componentDidMount() {
-    this.props.getInfo();
-  }
-
-  render() {
-
-    return (
-      <div>
-        <h1>Login Page</h1>
-        <p>{this.props.user.userData}</p>
-        <button onClick={() => goTo(Test, { message: "From login page" })}>
-          go to test page
-        </button>
-      </div>
-    );
-  }
+function Login() {
+  return (
+    <div>
+      <h1>Login Page</h1>
+      <LoginForm type="Login" />
+      <button onClick={() => goTo(Register, {message: "From login page"})}>
+        Register
+      </button>
+    </div>
+  );
 }
 
-const mapStateToProps = state => {
-  return {
-    user: state.authReducer.user,
-  };
-};
+export default Login;
 
-const mapDispatchToProps = {
-  getInfo,
-};
+// import React from "react";
+// import { connect } from "react-redux";
+// import { getInfo } from "../redux/actions/authAction";
+// import { goTo } from 'react-chrome-extension-router';
+// import Register from "./Register";
+// import LoginForm from "../components/forms/LoginForm";
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(LoginForm);
+// class Login extends React.Component {
+//   componentDidMount() {
+//     this.props.getInfo();
+//   }
+
+//   render() {
+//     const {users} = this.props.users;
+
+//     return (
+//       <div>
+//         <h1>Login Page</h1>
+//           {users !== undefined ? (users.map((user, i) => (
+//             <div key={i}>
+//               <p>{user.username}</p>
+//               <p>{user.email}</p>
+//             </div>
+//           ))) : ""}
+//         <LoginForm type="Login" />
+//         <button onClick={() => goTo(Register, { message: "From login page" })}>
+//           Register
+//         </button>
+//       </div>
+//     );
+//   }
+// }
+
+// const mapStateToProps = state => {
+//   return {
+//     users: state.authReducer.users,
+//   };
+// };
+
+// const mapDispatchToProps = {
+//   getInfo,
+// };
+
+// export default connect(
+//   mapStateToProps,
+//   mapDispatchToProps
+// )(Login);

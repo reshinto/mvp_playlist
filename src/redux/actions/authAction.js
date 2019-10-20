@@ -5,10 +5,10 @@ export const getInfo = () => (dispatch, state) => {
   axios
     .get("http://localhost:8080/users")
     .then(res => {
-      console.log(res.data)
+      console.log(res.data);
       dispatch({
         type: actionTypes.GET_INFO,
-        payload: res.data
+        payload: res.data,
       });
     })
     .catch(err => {

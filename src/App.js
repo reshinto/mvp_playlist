@@ -1,15 +1,17 @@
 import React from 'react';
 // import logo from './logo.svg';
-// import './App.css';
+import './App.css';
 import { Provider } from "react-redux";
 import store from "./redux/store";
 import Platform from "./components/Platform";
 
 function App() {
   return (
-    <Provider store={store}>
-      <Platform />
-    </Provider>
+    <div className="App">
+      <Provider store={store}>
+        <Platform />
+      </Provider>
+    </div>
   );
 }
 

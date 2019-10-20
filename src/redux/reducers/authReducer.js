@@ -1,13 +1,13 @@
 import * as actionTypes from "../types";
-import { updateObject } from "../utility";
+import {updateObject} from "../utility";
 
 const initialState = {
-  user: {}
+  users: {},
 };
 
 const getInfo = (state, action) => {
   return updateObject(state, {
-    user: action.payload
+    users: action.payload,
   });
 };
 
