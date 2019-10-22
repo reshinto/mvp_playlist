@@ -2,40 +2,6 @@ import axios from "axios";
 import * as actionTypes from "../types";
 import {db, tokenConfig} from "../utility";
 
-// export const getUsers = () => (dispatch) => {
-//   axios
-//     .get(`${db}/users`)
-//     .then(res => {
-//       console.log(res.data);
-//       dispatch({
-//         type: actionTypes.GET_USERS,
-//         payload: res.data,
-//       });
-//     })
-//     .catch(err => {
-//       console.log(err);
-//     });
-// };
-
-// export const login = (username, password) => (dispatch) => {
-//   axios
-//     .post(`${db}/users/login`, {
-//       username,
-//       password
-//     })
-//     .then(res => {
-//       console.log(res.data);
-//       dispatch({
-//         type: actionTypes.POST_LOGIN,
-//         payload: res.data,
-//       });
-//     })
-//     .catch(err => {
-//       console.log(err);
-//     });
-// };
-
-
 export const authStart = () => {
   return {
     type: actionTypes.AUTH_START
@@ -94,8 +60,8 @@ export const login = (username, password) => dispatch => {
   // Headers
   const config = {
     headers: {
-      "Content-Type": "application/json"
-    }
+      "Content-Type": "application/json",
+    },
   };
   dispatch(authStart());
   axios
@@ -150,6 +116,7 @@ export const signup = (username, email, password) => dispatch => {
 };
 
 const setAuthorizationHeader = token => {
+  console.log(token)
   const authToken = `Bearer ${token}`;
   localStorage.setItem("authToken", authToken);
 };
