@@ -116,7 +116,6 @@ export const signup = (username, email, password) => dispatch => {
 };
 
 const setAuthorizationHeader = token => {
-  console.log(token)
   const authToken = `Bearer ${token}`;
   localStorage.setItem("authToken", authToken);
 };
