@@ -1,34 +1,3 @@
-// import React from "react";
-// import {goTo} from "react-chrome-extension-router";
-// import Home from "../../pages/Home";
-
-// function LoginForm(props) {
-//   const {type} = props;
-//   return (
-//     <form action={`/${type.toLowerCase()}`} method="post">
-//       <div>
-//         <input type="text" name="username" placeholder="Username" />
-//       </div>
-//       {type.toLowerCase() === "register" ? (
-//         <div>
-//           <input type="email" name="email" placeholder="Email" />
-//         </div>
-//       ) : (
-//         ""
-//       )}
-//       <div>
-//         <input type="password" name="password" placeholder="password" />
-//       </div>
-//       <input
-//         onClick={() => goTo(Home, {message: "From login page"})}
-//         type="submit"
-//         value={type}
-//       />
-//     </form>
-//   );
-// }
-
-// export default LoginForm;
 import React from "react";
 import {connect} from "react-redux";
 import {login, signup} from "../../redux/actions/authAction";
@@ -52,7 +21,6 @@ class LoginForm extends React.Component {
     } else {
       this.props.signup(username, email, password);
     }
-    goTo(Home, {message: "From login page"})
   };
 
   onChange = prop => e => this.setState({[prop]: e.target.value});
@@ -60,6 +28,9 @@ class LoginForm extends React.Component {
   render() {
     const {username, email, password} = this.state;
     const {type} = this.props;
+    const {isAuthenticated} = this.props.auth;
+    if (isAuthenticated)
+      goTo(Home, {message: "From login page"})
     return (
       <form onSubmit={this.handleSubmit}>
         <div>
@@ -105,8 +76,7 @@ class LoginForm extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    loading: state.authReducer.loading,
-    error: state.authReducer.error,
+    auth: state.authReducer,
   };
 };
 
