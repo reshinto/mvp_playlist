@@ -52,6 +52,7 @@ class LoginForm extends React.Component {
     } else {
       this.props.signup(username, email, password);
     }
+    goTo(Home, {message: "From login page"})
   };
 
   onChange = prop => e => this.setState({[prop]: e.target.value});
@@ -93,7 +94,6 @@ class LoginForm extends React.Component {
           />
         </div>
         <button
-          // onClick={() => goTo(Home, {message: "From login page"})}
           type="submit"
         >
           {type}
