@@ -19,14 +19,14 @@ export default Login;
 
 // import React from "react";
 // import { connect } from "react-redux";
-// import { getInfo } from "../redux/actions/authAction";
+// import { getUsers } from "../redux/actions/authAction";
 // import { goTo } from 'react-chrome-extension-router';
 // import Register from "./Register";
 // import LoginForm from "../components/forms/LoginForm";
 
 // class Login extends React.Component {
 //   componentDidMount() {
-//     this.props.getInfo();
+//     this.props.getUsers();
 //   }
 
 //   render() {
@@ -57,7 +57,7 @@ export default Login;
 // };
 
 // const mapDispatchToProps = {
-//   getInfo,
+//   getUsers,
 // };
 
 // export default connect(

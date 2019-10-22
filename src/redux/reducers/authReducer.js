@@ -1,20 +1,88 @@
 import * as actionTypes from "../types";
 import {updateObject} from "../utility";
 
+// const initialState = {
+//   users: {},
+//   isAuthenticated: false,
+// };
+
+// const getInfo = (state, action) => {
+//   return updateObject(state, {
+//     users: action.payload,
+//   });
+// };
+
+// const loginSuccess = (state, action) => {
+//   return updateObject(state, {
+//     isAuthenticated: true
+//   });
+// };
+
+// const authReducer = (state = initialState, action) => {
+//   switch (action.type) {
+//     case actionTypes.GET_USERS:
+//       return getInfo(state, action);
+//     case actionTypes.POST_LOGIN:
+//       return loginSuccess(state, action);
+//     default:
+//       return state;
+//   }
+// };
+
 const initialState = {
-  users: {},
+  token: null,
+  error: null,
+  loading: false,
+  isAuthenticated: false,
 };
 
-const getInfo = (state, action) => {
+const authStart = (state, action) => {
   return updateObject(state, {
-    users: action.payload,
+    error: null,
+    loading: true
   });
+};
+
+const authSuccess = (state, action) => {
+  return updateObject(state, {
+    token: action.token,
+    error: null,
+    loading: false,
+    isAuthenticated: true
+  });
+};
+
+const authFail = (state, action) => {
+  return updateObject(state, {
+    // error: action.error,
+    error: action.payload,
+    loading: false,
+  });
+};
+
+const clearErrors = (state, action) => {
+  return updateObject(state, {
+    loading: false,
+    error: null
+  });
+};
+
+const authLogout = (state, action) => {
+  return updateObject(state, initialState);
 };
 
 const authReducer = (state = initialState, action) => {
   switch (action.type) {
-    case actionTypes.GET_INFO:
-      return getInfo(state, action);
+    case actionTypes.AUTH_START:
+      return authStart(state, action);
+    case actionTypes.AUTH_SUCCESS:
+      return authSuccess(state, action);
+    case actionTypes.AUTH_FAIL:
+      return authFail(state, action);
+    case actionTypes.AUTH_LOGOUT:
+      return authLogout(state, action);
+    case actionTypes.CLEAR_ERRORS:
+      return clearErrors(state, action);
     default:
       return state;
   }
