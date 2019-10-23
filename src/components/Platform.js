@@ -6,10 +6,11 @@ import {Router} from "react-chrome-extension-router";
 
 function Platform(props) {
   // const {isAuthenticated} = props.auth;
-  const isAuthenticated = localStorage.getItem("isAuthenticated")
+  const isAuthenticated = localStorage.getItem("isAuthenticated");
+  const token = localStorage.getItem("authToken");
   return (
     <Router>
-      {isAuthenticated === "true" ? <Home /> : <Login />}
+      {isAuthenticated === "true" && token ? <Home /> : <Login />}
     </Router>
   );
 }

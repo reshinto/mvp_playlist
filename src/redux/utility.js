@@ -13,11 +13,11 @@ export const tokenConfig = getState => {
       "Content-Type": "application/json"
     }
   };
-  // Get token from state
-  const token = getState().authReducer.token;
+  // Get token from localStorage instead from state
+  const token = localStorage.getItem("authToken");
   // If token, add to headers config
   if (token) {
-    config.headers["Authorization"] = `Bearer ${token}`;
+    config.headers["Authorization"] = `${token}`;
   }
   return config;
 };

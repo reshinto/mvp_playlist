@@ -29,6 +29,7 @@ class LoginForm extends React.Component {
     const {username, email, password} = this.state;
     const {type} = this.props;
     const {isAuthenticated} = this.props.auth;
+    console.log(this.props)
     if (isAuthenticated)
       goTo(Home, {message: "From login page"})
     return (
