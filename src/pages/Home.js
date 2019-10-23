@@ -1,8 +1,6 @@
 import React from "react";
 import {connect} from "react-redux";
 import {getUser} from "../redux/actions/userAction";
-import {getSongs} from "../redux/actions/songAction";
-import {goTo} from "react-chrome-extension-router";
 import AddVideoForm from "../components/forms/AddVideoForm";
 import SongList from "../components/SongList";
 

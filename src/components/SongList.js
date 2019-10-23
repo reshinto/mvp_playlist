@@ -18,6 +18,8 @@ class SongList extends React.Component {
                   {song.title} - {song.artist}
                 </h4>
                 <iframe
+                  id={i}
+                  title={`${song.title}|${song.artist}|${i}`}
                   className="songs"
                   width="300"
                   height="200"
