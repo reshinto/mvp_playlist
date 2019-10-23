@@ -5,10 +5,11 @@ import { connect } from "react-redux";
 import {Router} from "react-chrome-extension-router";
 
 function Platform(props) {
-  const {isAuthenticated} = props.auth;
+  // const {isAuthenticated} = props.auth;
+  const isAuthenticated = localStorage.getItem("isAuthenticated")
   return (
     <Router>
-      {isAuthenticated ? <Home /> : <Login />}
+      {isAuthenticated === "true" ? <Home /> : <Login />}
     </Router>
   );
 }
