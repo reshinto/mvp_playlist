@@ -6,13 +6,21 @@
     "default_popup": "index.html"
   },
   "background": {
-    "scripts": ["background.js"]
+    "scripts": [
+      "background.js"
+    ]
   },
   "content_scripts": [
     {
-      "matches": ["<all_urls>"],
-      "js": ["content-script.js"]
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "content-script.js"
+      ]
     }
   ],
-  "permissions": ["http://localhost:8080/*"]
+  "permissions": [
+    "http://localhost:8080/*"
+  ]
 }
