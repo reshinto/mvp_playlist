@@ -11,10 +11,10 @@ class addVideoForm extends React.Component {
     video_link: ""
   };
 
-  handleSubmit = e => {
+  handleSubmit = async e => {
     e.preventDefault();
     const {title, artist, video_link} = this.state;
-    this.props.addSong(title, artist, video_link);
+    await this.props.addSong(title, artist, video_link);
     goTo(Home, {message: "From Home page"})
   };
 
