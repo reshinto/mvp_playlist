@@ -22,6 +22,7 @@ class SongList extends React.Component {
 
   handleClose = async () => {
     await this.setState({open: false, currentId: 0});
+    window.location.reload(false);
   };
 
   render() {
@@ -49,8 +50,9 @@ class SongList extends React.Component {
                     </Dialog>
                     <DeleteForeverIcon
                       fontSize="small"
-                      onClick={() => {
-                        this.props.deleteSong(song.id);
+                      onClick={async () => {
+                        await this.props.deleteSong(song.id);
+                        window.location.reload(false);
                       }}
                     />
                   </span>

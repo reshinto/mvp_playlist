@@ -1,10 +1,10 @@
 import React from "react";
 import {connect} from "react-redux";
 import {addSong, editSong} from "../../redux/actions/songAction";
-import {goTo} from "react-chrome-extension-router";
-import Home from "../../pages/Home";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogActions from "@material-ui/core/DialogActions";
+// import {goTo} from "react-chrome-extension-router";
+// import Home from "../../pages/Home";
 
 class AddVideoForm extends React.Component {
   state = {
@@ -36,8 +36,8 @@ class AddVideoForm extends React.Component {
       localStorage.setItem("title", ""),
       localStorage.setItem("url", ""),
     ]).then(() => {
-      setTimeout(() => goTo(Home, {message: "From Home page"}), 200);
-      // window.location.reload(false);
+      // setTimeout(() => goTo(Home, {message: "From Home page"}), 200);
+      window.location.reload(false);
     });
   };
 
@@ -52,7 +52,6 @@ class AddVideoForm extends React.Component {
 
   render() {
     const {type, songId} = this.props;
-    console.log("song id", songId)
     let {artist} = this.state;
     let title =
       localStorage.getItem("title") === ""
