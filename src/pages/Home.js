@@ -14,7 +14,7 @@ class Home extends React.Component {
     return (
       <div>
         <h1>{user.length > 0 ? user[0].username : ""} Songs List</h1>
-        <AddVideoForm />
+        <AddVideoForm type="Add"/>
         <SongList />
       </div>
     );
