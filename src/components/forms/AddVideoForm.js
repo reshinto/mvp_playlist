@@ -36,8 +36,8 @@ class AddVideoForm extends React.Component {
       localStorage.setItem("title", ""),
       localStorage.setItem("url", ""),
     ]).then(() => {
-      // setTimeout(() => goTo(Home, {message: "From Home page"}), 200);
-      window.location.reload(false);
+      setTimeout(() => goTo(Home, {message: "From Home page"}), 200);
+      // window.location.reload(false);
     });
   };
 
@@ -63,7 +63,7 @@ class AddVideoForm extends React.Component {
         ? this.state.video_link
         : localStorage.getItem("url");
     if (localStorage.getItem("url") !== "") {
-      this.getSubmitType(title, artist, video_link, songId);
+      this.submit(title, artist, video_link, songId);
     }
     return (
       <form onSubmit={this.handleSubmit}>
