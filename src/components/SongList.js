@@ -1,6 +1,8 @@
 import React from "react";
 import {connect} from "react-redux";
 import {getSongs} from "../redux/actions/songAction";
+import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
+import EditIcon from "@material-ui/icons/Edit";
 
 class SongList extends React.Component {
   componentDidMount() {
@@ -16,6 +18,11 @@ class SongList extends React.Component {
               <div key={i}>
                 <h4>
                   {song.title} - {song.artist}
+                  <span>
+                    {" "}
+                    <EditIcon fontSize="small" />{" "}
+                    <DeleteForeverIcon fontSize="small" />
+                  </span>
                 </h4>
                 <iframe
                   id={i}
