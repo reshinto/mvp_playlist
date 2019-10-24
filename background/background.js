@@ -53,7 +53,6 @@ const contextMenuMainItem = {
 chrome.contextMenus.create(contextMenuMainItem);
 
 chrome.contextMenus.onClicked.addListener((info, tab) => {
-  console.log(info, tab);
   localStorage.setItem("title", tab.title)
   localStorage.setItem("url", tab.url)
 });
