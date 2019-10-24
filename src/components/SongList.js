@@ -25,6 +25,15 @@ class SongList extends React.Component {
     window.location.reload(false);
   };
 
+  handleTitleClick = id => {
+    const iframe = document.getElementById(`${id}`);
+    if (iframe.style.display === "none") {
+      iframe.style.display = "block";
+    } else {
+      iframe.style.display = "none";
+    }
+  };
+
   render() {
     const {songs} = this.props;
     return (
@@ -32,8 +41,10 @@ class SongList extends React.Component {
         {songs.length > 0
           ? songs.map((song, i) => (
               <div key={song.id}>
-                <h4>
-                  {song.title} - {song.artist}
+                <h3>
+                  <span onClick={() => this.handleTitleClick(song.id)}>
+                    {song.title} - {song.artist}
+                  </span>
                   <span>
                     {" "}
                     <EditIcon
@@ -55,8 +66,9 @@ class SongList extends React.Component {
                       }}
                     />
                   </span>
-                </h4>
+                </h3>
                 <iframe
+                  style={{display: "none"}}
                   id={song.id}
                   title={`${song.title}|${song.artist}|${song.id}`}
                   className="songs"
@@ -70,6 +82,7 @@ class SongList extends React.Component {
                   allow="encrypted-media"
                   allowfullscreen="true"
                 ></iframe>
+                <hr/>
               </div>
             ))
           : ""}
