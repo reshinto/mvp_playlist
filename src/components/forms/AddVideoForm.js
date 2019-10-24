@@ -1,10 +1,12 @@
 import React from "react";
 import {connect} from "react-redux";
-import {addSong} from "../../redux/actions/songAction";
+import {addSong, editSong} from "../../redux/actions/songAction";
 import {goTo} from "react-chrome-extension-router";
 import Home from "../../pages/Home";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogActions from "@material-ui/core/DialogActions";
 
-class addVideoForm extends React.Component {
+class AddVideoForm extends React.Component {
   state = {
     title: "",
     artist: "",
@@ -12,6 +14,8 @@ class addVideoForm extends React.Component {
   };
 
   handleSubmit = async e => {
+    e.preventDefault();
+    const {songId} = this.props;
     let {artist} = this.state;
     let title =
       localStorage.getItem("title") === ""
@@ -21,23 +25,34 @@ class addVideoForm extends React.Component {
       localStorage.getItem("url") === ""
         ? this.state.video_link
         : localStorage.getItem("url");
-    e.preventDefault();
-    this.submit(title, artist, video_link);
+    this.submit(title, artist, video_link, songId);
   };
 
   onChange = prop => e => this.setState({[prop]: e.target.value});
 
-  submit = (title, artist, video_link) => {
+  submit = (title, artist, video_link, songId) => {
     Promise.all([
-      this.props.addSong(title, artist, video_link),
+      this.getSubmitType(title, artist, video_link, songId),
       localStorage.setItem("title", ""),
       localStorage.setItem("url", ""),
     ]).then(() => {
-      goTo(Home, {message: "From Home page"});
+      // setTimeout(() => goTo(Home, {message: "From Home page"}), 200);
+      window.location.reload(false);
     });
   };
 
+  getSubmitType = async (title, artist, video_link, songId) => {
+    const {type} = this.props;
+    if (type.toLowerCase() === "add") {
+      return await this.props.addSong(title, artist, video_link);
+    } else if (type.toLowerCase() === "edit") {
+      return await this.props.editSong(title, artist, video_link, songId);
+    }
+  };
+
   render() {
+    const {type, songId} = this.props;
+    console.log("song id", songId)
     let {artist} = this.state;
     let title =
       localStorage.getItem("title") === ""
@@ -48,11 +63,11 @@ class addVideoForm extends React.Component {
         ? this.state.video_link
         : localStorage.getItem("url");
     if (localStorage.getItem("url") !== "") {
-      this.submit(title, artist, video_link);
+      this.getSubmitType(title, artist, video_link, songId);
     }
     return (
       <form onSubmit={this.handleSubmit}>
-        <div>
+        <DialogContent>
           <input
             type="text"
             name="title"
@@ -60,8 +75,8 @@ class addVideoForm extends React.Component {
             value={title}
             onChange={this.onChange("title")}
           />
-        </div>
-        <div>
+        </DialogContent>
+        <DialogContent>
           <input
             type="text"
             name="artist"
@@ -69,8 +84,8 @@ class addVideoForm extends React.Component {
             value={artist}
             onChange={this.onChange("artist")}
           />
-        </div>
-        <div>
+        </DialogContent>
+        <DialogContent>
           <input
             type="text"
             name="video_link"
@@ -78,8 +93,10 @@ class addVideoForm extends React.Component {
             value={video_link}
             onChange={this.onChange("video_link")}
           />
-        </div>
-        <button type="submit">Add</button>
+        </DialogContent>
+        <DialogActions>
+          <button type="submit">{type}</button>
+        </DialogActions>
       </form>
     );
   }
@@ -87,9 +104,11 @@ class addVideoForm extends React.Component {
 
 const mapDispatchToProps = {
   addSong: (title, artist, video_link) => addSong(title, artist, video_link),
+  editSong: (title, artist, video_link, songId) =>
+    editSong(title, artist, video_link, songId),
 };
 
 export default connect(
   null,
   mapDispatchToProps,
-)(addVideoForm);
+)(AddVideoForm);

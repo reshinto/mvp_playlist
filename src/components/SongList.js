@@ -2,16 +2,27 @@ import React from "react";
 import {connect} from "react-redux";
 import {getSongs, deleteSong} from "../redux/actions/songAction";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
+import Dialog from "@material-ui/core/Dialog";
 import EditIcon from "@material-ui/icons/Edit";
+import AddVideoForm from "./forms/AddVideoForm";
 
 class SongList extends React.Component {
+  state = {
+    open: false,
+    currentId: 0,
+  };
+
   componentDidMount() {
     this.props.getSongs();
   }
 
-  handleEdit = () => {
+  handleClickOpen = async id => {
+    await this.setState({open: true, currentId: id});
+  };
 
-  }
+  handleClose = async () => {
+    await this.setState({open: false, currentId: 0});
+  };
 
   render() {
     const {songs} = this.props;
@@ -24,8 +35,24 @@ class SongList extends React.Component {
                   {song.title} - {song.artist}
                   <span>
                     {" "}
-                    <EditIcon fontSize="small" onClick={() => alert("yeah")}/>{" "}
-                    <DeleteForeverIcon fontSize="small" onClick={() => {this.props.deleteSong(song.id)}}/>
+                    <EditIcon
+                      fontSize="small"
+                      onClick={() => this.handleClickOpen(song.id)}
+                    />
+                    <Dialog
+                      open={this.state.open}
+                      onClose={this.handleClose}
+                      aria-labelledby="form-dialog-title"
+                      key={song.id}
+                    >
+                      <AddVideoForm type="Edit" songId={this.state.currentId} />
+                    </Dialog>
+                    <DeleteForeverIcon
+                      fontSize="small"
+                      onClick={() => {
+                        this.props.deleteSong(song.id);
+                      }}
+                    />
                   </span>
                 </h4>
                 <iframe

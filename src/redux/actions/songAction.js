@@ -18,11 +18,14 @@ export const getSongs = () => (dispatch, state) => {
 
 export const addSong = (title, artist, video_link) => (dispatch, state) => {
   axios
-    .post(`${db}/users/user/songs`,
+    .post(
+      `${db}/users/user/songs`,
       {
-        title, artist, video_link
+        title,
+        artist,
+        video_link,
       },
-      tokenConfig(state)
+      tokenConfig(state),
     )
     .then(res => {
       dispatch({
@@ -35,13 +38,21 @@ export const addSong = (title, artist, video_link) => (dispatch, state) => {
     });
 };
 
-export const editSong = (title, artist, video_link) => (dispatch, state) => {
+export const editSong = (title, artist, video_link, id) => (
+  dispatch,
+  state,
+) => {
+  console.log("id", id)
   axios
-    .put(`${db}/users/user/songs`,
+    .put(
+      `${db}/users/user/songs`,
       {
-        title, artist, video_link
+        title,
+        artist,
+        video_link,
+        id,
       },
-      tokenConfig(state)
+      tokenConfig(state),
     )
     .then(res => {
       dispatch({
@@ -54,14 +65,17 @@ export const editSong = (title, artist, video_link) => (dispatch, state) => {
     });
 };
 
-export const deleteSong = (id) => (dispatch, state) => {
+export const deleteSong = id => (dispatch, state) => {
   const token = localStorage.getItem("authToken");
   axios
-    .delete(`${db}/users/user/songs`,{data: {id}, headers: {authorization: token}})
+    .delete(`${db}/users/user/songs`, {
+      data: {id},
+      headers: {authorization: token},
+    })
     .then(res => {
       dispatch({
         type: actionTypes.DELETE_SONG,
-        payload: res.data
+        payload: res.data,
       });
     })
     .catch(err => {
