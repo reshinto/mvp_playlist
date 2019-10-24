@@ -55,18 +55,19 @@ chrome.contextMenus.create(contextMenuMainItem);
 chrome.contextMenus.onClicked.addListener((info, tab) => {
   localStorage.setItem("title", tab.title);
   localStorage.setItem("url", tab.url);
+  window.location.reload();
 });
 
-chrome.browserAction.onClicked.addListener(tab => {
+// chrome.browserAction.onClicked.addListener(tab => {
   // chrome.windows.create({
   //   url: chrome.runtime.getURL("index.html"),
   //   type: "popup",
   //   focused: true,
   // });
-  alert("hihi")
-  window.open(window.location.href,'_blank');
+  // alert("hihi")
+  // window.open(window.location.href,'_blank');
 
-});
+// });
 
 // chrome.runtime.onMessage.addListener(function(req, sender, res) {
 //   if (req.message == "openWindow") {

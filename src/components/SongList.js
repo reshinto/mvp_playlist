@@ -44,7 +44,6 @@ class SongList extends React.Component {
                       open={this.state.open}
                       onClose={this.handleClose}
                       aria-labelledby="form-dialog-title"
-                      key={song.id}
                     >
                       <AddVideoForm type="Edit" songId={this.state.currentId} />
                     </Dialog>
