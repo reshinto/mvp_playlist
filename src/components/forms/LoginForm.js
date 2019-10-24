@@ -1,5 +1,7 @@
 import React from "react";
 import {connect} from "react-redux";
+import Button from "@material-ui/core/Button";
+import TextField from "@material-ui/core/TextField";
 import {login, signup} from "../../redux/actions/authAction";
 import {goTo} from "react-chrome-extension-router";
 import Home from "../../pages/Home";
@@ -29,47 +31,44 @@ class LoginForm extends React.Component {
     const {username, email, password} = this.state;
     const {type} = this.props;
     const {isAuthenticated} = this.props.auth;
-    console.log(this.props)
-    if (isAuthenticated)
-      goTo(Home, {message: "From login page"})
+    if (isAuthenticated) goTo(Home, {message: "From login page"});
     return (
       <form onSubmit={this.handleSubmit}>
-        <div>
-          <input
-            type="text"
-            name="username"
-            placeholder="Username"
-            value={username}
-            onChange={this.onChange("username")}
-          />
-        </div>
+        <TextField
+          type="text"
+          name="username"
+          value={username}
+          onChange={this.onChange("username")}
+          autoFocus
+          margin="dense"
+          label="Username"
+          autoComplete="username"
+          fullWidth
+        />
         {type.toLowerCase() === "register" ? (
-          <div>
-            <input
-              type="email"
-              name="email"
-              placeholder="Email"
-              value={email}
-              onChange={this.onChange("email")}
-            />
-          </div>
+          <TextField
+            type="email"
+            name="email"
+            value={email}
+            onChange={this.onChange("email")}
+            margin="dense"
+            label="Email"
+            autoComplete="email"
+            fullWidth
+          />
         ) : (
           ""
         )}
-        <div>
-          <input
-            type="password"
-            name="password"
-            placeholder="password"
-            value={password}
-            onChange={this.onChange("password")}
-          />
-        </div>
-        <button
-          type="submit"
-        >
-          {type}
-        </button>
+        <TextField
+          type="password"
+          name="password"
+          onChange={this.onChange("password")}
+          margin="dense"
+          label="Password"
+          autoComplete="current-password"
+          fullWidth
+        />
+        <Button fullWidth color="primary" type="submit">{type}</Button>
       </form>
     );
   }

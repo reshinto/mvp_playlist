@@ -4,6 +4,8 @@ import {getSongs, deleteSong} from "../redux/actions/songAction";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import Dialog from "@material-ui/core/Dialog";
 import EditIcon from "@material-ui/icons/Edit";
+import Button from "@material-ui/core/Button";
+import Tooltip from "@material-ui/core/Tooltip";
 import AddVideoForm from "./forms/AddVideoForm";
 
 class SongList extends React.Component {
@@ -47,10 +49,11 @@ class SongList extends React.Component {
                   </span>
                   <span>
                     {" "}
-                    <EditIcon
-                      fontSize="small"
-                      onClick={() => this.handleClickOpen(song.id)}
-                    />
+                    <Tooltip title="Edit">
+                      <Button onClick={() => this.handleClickOpen(song.id)}>
+                        <EditIcon fontSize="small" />
+                      </Button>
+                    </Tooltip>
                     <Dialog
                       open={this.state.open}
                       onClose={this.handleClose}
@@ -58,13 +61,16 @@ class SongList extends React.Component {
                     >
                       <AddVideoForm type="Edit" songId={this.state.currentId} />
                     </Dialog>
-                    <DeleteForeverIcon
-                      fontSize="small"
-                      onClick={async () => {
-                        await this.props.deleteSong(song.id);
-                        window.location.reload(false);
-                      }}
-                    />
+                    <Tooltip title="Delete">
+                      <Button
+                        onClick={async () => {
+                          await this.props.deleteSong(song.id);
+                          window.location.reload(false);
+                        }}
+                      >
+                        <DeleteForeverIcon fontSize="small" />
+                      </Button>
+                    </Tooltip>
                   </span>
                 </h3>
                 <iframe
@@ -82,7 +88,7 @@ class SongList extends React.Component {
                   allow="encrypted-media"
                   allowfullscreen="true"
                 ></iframe>
-                <hr/>
+                <hr />
               </div>
             ))
           : ""}

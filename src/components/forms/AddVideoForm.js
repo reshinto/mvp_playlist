@@ -1,5 +1,7 @@
 import React from "react";
 import {connect} from "react-redux";
+import TextField from "@material-ui/core/TextField";
+import Button from "@material-ui/core/Button";
 import {addSong, editSong} from "../../redux/actions/songAction";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogActions from "@material-ui/core/DialogActions";
@@ -67,34 +69,47 @@ class AddVideoForm extends React.Component {
     return (
       <form onSubmit={this.handleSubmit}>
         <DialogContent>
-          <input
+          <TextField
             type="text"
             name="title"
-            placeholder="Title"
             value={title}
             onChange={this.onChange("title")}
+            margin="dense"
+            label="Title"
+            fullWidth
           />
         </DialogContent>
         <DialogContent>
-          <input
+          <TextField
             type="text"
             name="artist"
-            placeholder="Artist"
             value={artist}
             onChange={this.onChange("artist")}
+            margin="dense"
+            label="Artist"
+            fullWidth
           />
         </DialogContent>
         <DialogContent>
-          <input
+          <TextField
             type="text"
             name="video_link"
-            placeholder="URL Link"
             value={video_link}
             onChange={this.onChange("video_link")}
+            margin="dense"
+            label="URL Link"
+            fullWidth
           />
         </DialogContent>
-        <DialogActions>
-          <button type="submit">{type}</button>
+        <DialogActions
+          style={{
+            display: "flex",
+            justifyContent: "center",
+          }}
+        >
+          <Button fullWidth color="primary" type="submit">
+            {type}
+          </Button>
         </DialogActions>
       </form>
     );

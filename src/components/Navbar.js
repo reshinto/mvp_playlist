@@ -6,6 +6,8 @@ import PhonelinkEraseIcon from "@material-ui/icons/PhonelinkErase";
 import QueuePlayNextIcon from "@material-ui/icons/QueuePlayNext";
 import PlaylistAddIcon from "@material-ui/icons/PlaylistAdd";
 import Dialog from "@material-ui/core/Dialog";
+import Button from "@material-ui/core/Button";
+import Tooltip from "@material-ui/core/Tooltip";
 import SongList from "../components/SongList";
 import AddVideoForm from "../components/forms/AddVideoForm";
 
@@ -59,33 +61,53 @@ class Navbar extends React.Component {
             alignItems: "center",
           }}
         >
-          <MusicVideoIcon
-            onClick={async () => {
-              await this.handleSongs(true);
-              await this.handlePlaylists(false);
-              await this.handleFavorites(false);
-            }}
-          />
-          <QueueMusicIcon
-            onClick={async () => {
-              await this.handleSongs(false);
-              await this.handlePlaylists(true);
-              await this.handleFavorites(false);
-            }}
-          />
-          <StarsIcon
-            onClick={async () => {
-              await this.handleSongs(false);
-              await this.handlePlaylists(false);
-              await this.handleFavorites(true);
-            }}
-          />
-          <PhonelinkEraseIcon onClick={this.handleLogout} />
+          <Tooltip title="Songs">
+            <Button
+              onClick={async () => {
+                await this.handleSongs(true);
+                await this.handlePlaylists(false);
+                await this.handleFavorites(false);
+              }}
+            >
+              <MusicVideoIcon />
+            </Button>
+          </Tooltip>
+          <Tooltip title="Playlists">
+            <Button
+              onClick={async () => {
+                await this.handleSongs(false);
+                await this.handlePlaylists(true);
+                await this.handleFavorites(false);
+              }}
+            >
+              <QueueMusicIcon></QueueMusicIcon>
+            </Button>
+          </Tooltip>
+          <Tooltip title="Favorites">
+            <Button
+              onClick={async () => {
+                await this.handleSongs(false);
+                await this.handlePlaylists(false);
+                await this.handleFavorites(true);
+              }}
+            >
+              <StarsIcon />
+            </Button>
+          </Tooltip>
+          <Tooltip title="Logout">
+            <Button onClick={this.handleLogout}>
+              <PhonelinkEraseIcon />
+            </Button>
+          </Tooltip>
         </div>
         <div style={{marginTop: "20px"}}>
           {songsEvent ? (
             <>
-              <QueuePlayNextIcon onClick={() => this.handleClickOpen()} />
+              <Tooltip title="Add Song">
+                <Button onClick={() => this.handleClickOpen()}>
+                  <QueuePlayNextIcon />
+                </Button>
+              </Tooltip>
               <Dialog
                 open={this.state.open}
                 onClose={this.handleClose}
@@ -96,7 +118,11 @@ class Navbar extends React.Component {
               <SongList />
             </>
           ) : playlistsEvent ? (
-            <PlaylistAddIcon />
+            <Tooltip title="Add Playlist">
+              <Button>
+                <PlaylistAddIcon />
+              </Button>
+            </Tooltip>
           ) : favoritesEvent ? (
             ""
           ) : (
