@@ -1,6 +1,6 @@
 import React from "react";
 import {connect} from "react-redux";
-import {getSongs} from "../redux/actions/songAction";
+import {getSongs, deleteSong} from "../redux/actions/songAction";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import EditIcon from "@material-ui/icons/Edit";
 
@@ -9,24 +9,28 @@ class SongList extends React.Component {
     this.props.getSongs();
   }
 
+  handleEdit = () => {
+
+  }
+
   render() {
     const {songs} = this.props;
     return (
       <div>
         {songs.length > 0
           ? songs.map((song, i) => (
-              <div key={i}>
+              <div key={song.id}>
                 <h4>
                   {song.title} - {song.artist}
                   <span>
                     {" "}
-                    <EditIcon fontSize="small" />{" "}
-                    <DeleteForeverIcon fontSize="small" />
+                    <EditIcon fontSize="small" onClick={() => alert("yeah")}/>{" "}
+                    <DeleteForeverIcon fontSize="small" onClick={() => {this.props.deleteSong(song.id)}}/>
                   </span>
                 </h4>
                 <iframe
-                  id={i}
-                  title={`${song.title}|${song.artist}|${i}`}
+                  id={song.id}
+                  title={`${song.title}|${song.artist}|${song.id}`}
                   className="songs"
                   width="300"
                   height="200"
@@ -54,6 +58,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = {
   getSongs,
+  deleteSong,
 };
 
 export default connect(
