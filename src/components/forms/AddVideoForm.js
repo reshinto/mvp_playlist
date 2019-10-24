@@ -74,6 +74,7 @@ class AddVideoForm extends React.Component {
             name="title"
             value={title}
             onChange={this.onChange("title")}
+            autoFocus
             margin="dense"
             label="Title"
             fullWidth
