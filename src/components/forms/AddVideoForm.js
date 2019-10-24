@@ -8,20 +8,48 @@ class addVideoForm extends React.Component {
   state = {
     title: "",
     artist: "",
-    video_link: ""
+    video_link: "",
   };
 
   handleSubmit = async e => {
+    let {artist} = this.state;
+    let title =
+      localStorage.getItem("title") === ""
+        ? this.state.title
+        : localStorage.getItem("title");
+    let video_link =
+      localStorage.getItem("url") === ""
+        ? this.state.video_link
+        : localStorage.getItem("url");
     e.preventDefault();
-    const {title, artist, video_link} = this.state;
-    await this.props.addSong(title, artist, video_link);
-    goTo(Home, {message: "From Home page"})
+    this.submit(title, artist, video_link);
   };
 
   onChange = prop => e => this.setState({[prop]: e.target.value});
 
+  submit = (title, artist, video_link) => {
+    Promise.all([
+      this.props.addSong(title, artist, video_link),
+      localStorage.setItem("title", ""),
+      localStorage.setItem("url", ""),
+    ]).then(() => {
+      goTo(Home, {message: "From Home page"});
+    });
+  };
+
   render() {
-    const {title, artist, video_link} = this.state;
+    let {artist} = this.state;
+    let title =
+      localStorage.getItem("title") === ""
+        ? this.state.title
+        : localStorage.getItem("title");
+    let video_link =
+      localStorage.getItem("url") === ""
+        ? this.state.video_link
+        : localStorage.getItem("url");
+    if (localStorage.getItem("url") !== "") {
+      this.submit(title, artist, video_link);
+    }
     return (
       <form onSubmit={this.handleSubmit}>
         <div>
@@ -51,11 +79,7 @@ class addVideoForm extends React.Component {
             onChange={this.onChange("video_link")}
           />
         </div>
-        <button
-          type="submit"
-        >
-          Add
-        </button>
+        <button type="submit">Add</button>
       </form>
     );
   }

@@ -119,4 +119,7 @@ const setAuthorizationHeader = token => {
   const authToken = token;
   localStorage.setItem("authToken", authToken);
   localStorage.setItem("isAuthenticated", "true");
+  localStorage.setItem("title", "");
+  localStorage.setItem("artist", "");
+  localStorage.setItem("url", "");
 };

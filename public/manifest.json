@@ -8,7 +8,8 @@
   "background": {
     "scripts": [
       "background.js"
-    ]
+    ],
+    "persistent": false
   },
   "content_scripts": [
     {
@@ -21,6 +22,7 @@
     }
   ],
   "permissions": [
-    "http://localhost:8080/*"
+    "http://localhost:8080/*",
+    "contextMenus"
   ]
 }
