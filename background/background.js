@@ -53,6 +53,38 @@ const contextMenuMainItem = {
 chrome.contextMenus.create(contextMenuMainItem);
 
 chrome.contextMenus.onClicked.addListener((info, tab) => {
-  localStorage.setItem("title", tab.title)
-  localStorage.setItem("url", tab.url)
+  localStorage.setItem("title", tab.title);
+  localStorage.setItem("url", tab.url);
 });
+
+chrome.browserAction.onClicked.addListener(tab => {
+  // chrome.windows.create({
+  //   url: chrome.runtime.getURL("index.html"),
+  //   type: "popup",
+  //   focused: true,
+  // });
+  alert("hihi")
+  window.open(window.location.href,'_blank');
+
+});
+
+// chrome.runtime.onMessage.addListener(function(req, sender, res) {
+//   if (req.message == "openWindow") {
+//     console.log(req.message)
+//     openCustomWindow();
+//   }
+// });
+
+// function openCustomWindow() {
+//   var winObj = {
+//     url: chrome.runtime.getURL("index.html"),
+//     width: 600,
+//     height: 600,
+//     left: Math.round(window.innerWidth / 2 - 400 / 2),
+//     top: Math.round(window.innerHeight / 2 - 400 / 2),
+//     focused: true,
+//     type: "normal",
+//     state: "normal",
+//   };
+//   chrome.windows.create(winObj);
+// }

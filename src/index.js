@@ -5,6 +5,14 @@ import store from "./redux/store";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 
+if (!window.opener) {
+  window.open(
+    window.location.href,
+    "popUpWindow",
+    "height=500,width=400,left=100,top=100,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no, status=yes",
+  );
+}
+
 ReactDOM.render(
   <Provider store={store}>
     <App />
