@@ -24,16 +24,19 @@ class SongList extends React.Component {
   };
 
   handleClose = async () => {
-    await this.setState({open: false, currentId: 0});
+    await this.setState({open: false});
     window.location.reload(false);
   };
 
   handleTitleClick = id => {
-    const iframe = document.getElementById(`${id}`);
+    const iframe = document.getElementById(`video${id}`);
+    const text = document.getElementById(`text${id}`);
     if (iframe.style.display === "none") {
       iframe.style.display = "inline-block";
+      text.style.color = "#f50057";
     } else {
       iframe.style.display = "none";
+      text.style.color = "white";
     }
   };
 
@@ -45,38 +48,41 @@ class SongList extends React.Component {
           ? songs.map((song, i) => (
               <div key={song.id}>
                 <h3>
-                  <span onClick={() => this.handleTitleClick(song.id)}>
+                  <Button
+                    id={`text${song.id}`}
+                    style={{color: "white"}}
+                    onClick={() => this.handleTitleClick(song.id)}
+                  >
                     {song.title} - {song.artist}
-                  </span>
-                  <span>
-                    {" "}
-                    <Tooltip title="Edit">
-                      <Button onClick={() => this.handleClickOpen(song.id)}>
-                        <EditIcon fontSize="small" color="secondary" />
-                      </Button>
-                    </Tooltip>
-                    <Dialog
-                      open={this.state.open}
-                      onClose={this.handleClose}
-                      aria-labelledby="form-dialog-title"
+                  </Button>
+                  <Tooltip title="Edit">
+                    <Button
+                      onClick={() => this.handleClickOpen(song.id)}
                     >
-                      <AddVideoForm type="Edit" songId={this.state.currentId} />
-                    </Dialog>
-                    <Tooltip title="Delete">
-                      <Button
-                        onClick={async () => {
-                          await this.props.deleteSong(song.id);
-                          window.location.reload(false);
-                        }}
-                      >
-                        <DeleteForeverIcon fontSize="small" color="secondary" />
-                      </Button>
-                    </Tooltip>
-                  </span>
+                      <EditIcon fontSize="small" color="secondary" />
+                    </Button>
+                  </Tooltip>
+                  <Dialog
+                    open={this.state.open}
+                    onClose={this.handleClose}
+                    aria-labelledby="form-dialog-title"
+                  >
+                    <AddVideoForm type="Edit" songId={this.state.currentId} />
+                  </Dialog>
+                  <Tooltip title="Delete">
+                    <Button
+                      onClick={async () => {
+                        await this.props.deleteSong(song.id);
+                        window.location.reload(false);
+                      }}
+                    >
+                      <DeleteForeverIcon fontSize="small" color="secondary" />
+                    </Button>
+                  </Tooltip>
                 </h3>
                 <iframe
                   style={{display: "none"}}
-                  id={song.id}
+                  id={`video${song.id}`}
                   title={`${song.title}|${song.artist}|${song.id}`}
                   className="songs"
                   width="300"
