@@ -58,16 +58,16 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
   window.location.reload();
 });
 
-// chrome.browserAction.onClicked.addListener(tab => {
-  // chrome.windows.create({
-  //   url: chrome.runtime.getURL("index.html"),
-  //   type: "popup",
-  //   focused: true,
-  // });
-  // alert("hihi")
-  // window.open(window.location.href,'_blank');
-
-// });
+chrome.browserAction.onClicked.addListener(tab => {
+  if (!window.opener) {
+    window.open(
+      "index.html",
+      "popUpWindow",
+      `height=500,width=400,left=${window.screen.width -
+        500},top=100,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no, status=yes`,
+    );
+  }
+});
 
 // chrome.runtime.onMessage.addListener(function(req, sender, res) {
 //   if (req.message == "openWindow") {
