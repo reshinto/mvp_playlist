@@ -16,7 +16,7 @@ class Home extends React.Component {
         <h1>{user.length > 0 ? user[0].username : ""} Songs List</h1>
         <Navbar />
         <div
-          style={{visibility: "hidden"}}
+          style={{visibility: "hidden", position: "absolute", top: "0"}}
         >
           <AddVideoForm type="Add" />
         </div>
