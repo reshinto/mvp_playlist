@@ -21,6 +21,7 @@
   ],
   "permissions": [
     "http://localhost:8080/*",
+    "https://project2backendtest.herokuapp.com/*",
     "contextMenus"
   ]
 }

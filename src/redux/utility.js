@@ -22,4 +22,4 @@ export const tokenConfig = getState => {
   return config;
 };
 
-export const db = "http://localhost:8080";
+export const db = "http://localhost:8080" || "https://project2backendtest.herokuapp.com";
