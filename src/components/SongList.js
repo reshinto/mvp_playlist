@@ -4,10 +4,11 @@ import {getSongs, deleteSong} from "../redux/actions/songAction";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import Dialog from "@material-ui/core/Dialog";
 import EditIcon from "@material-ui/icons/Edit";
+import StarIcon from '@material-ui/icons/Star';
 import Button from "@material-ui/core/Button";
 import Tooltip from "@material-ui/core/Tooltip";
 import AddVideoForm from "./forms/AddVideoForm";
-import SimpleExpansionPanel from "./SimpleExpansionPanel";
+// import SimpleExpansionPanel from "./SimpleExpansionPanel";
 // import YouTubeVideo from "./YouTubeVideo";
 
 class SongList extends React.Component {
@@ -55,6 +56,11 @@ class SongList extends React.Component {
                   >
                     {song.title} - {song.artist}
                   </Button>
+                  <Tooltip title="Like">
+                    <Button>
+                      <StarIcon fontSize="small" color="secondary" />
+                    </Button>
+                  </Tooltip>
                   <Tooltip title="Edit">
                     <Button
                       onClick={() => this.handleClickOpen(song.id)}

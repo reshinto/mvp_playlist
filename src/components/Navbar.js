@@ -2,6 +2,7 @@ import React from "react";
 import MusicVideoIcon from "@material-ui/icons/MusicVideo";
 import QueueMusicIcon from "@material-ui/icons/QueueMusic";
 import StarsIcon from "@material-ui/icons/Stars";
+import StarIcon from '@material-ui/icons/Star';
 import PhonelinkEraseIcon from "@material-ui/icons/PhonelinkErase";
 import QueuePlayNextIcon from "@material-ui/icons/QueuePlayNext";
 import PlaylistAddIcon from "@material-ui/icons/PlaylistAdd";
@@ -69,7 +70,7 @@ class Navbar extends React.Component {
                 await this.handleFavorites(false);
               }}
             >
-              <MusicVideoIcon color="secondary"/>
+              <MusicVideoIcon color="secondary" />
             </Button>
           </Tooltip>
           <Tooltip title="Playlists">
@@ -80,7 +81,7 @@ class Navbar extends React.Component {
                 await this.handleFavorites(false);
               }}
             >
-              <QueueMusicIcon color="secondary"/>
+              <QueueMusicIcon color="secondary" />
             </Button>
           </Tooltip>
           <Tooltip title="Favorites">
@@ -91,12 +92,12 @@ class Navbar extends React.Component {
                 await this.handleFavorites(true);
               }}
             >
-              <StarsIcon color="secondary"/>
+              <StarsIcon color="secondary" />
             </Button>
           </Tooltip>
           <Tooltip title="Logout">
             <Button onClick={this.handleLogout}>
-              <PhonelinkEraseIcon color="secondary"/>
+              <PhonelinkEraseIcon color="secondary" />
             </Button>
           </Tooltip>
         </div>
@@ -124,7 +125,11 @@ class Navbar extends React.Component {
               </Button>
             </Tooltip>
           ) : favoritesEvent ? (
-            ""
+            <Tooltip title="Add Like">
+              <Button>
+                <StarIcon fontSize="small" color="secondary" />
+              </Button>
+            </Tooltip>
           ) : (
             ""
           )}
