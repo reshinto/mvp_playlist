@@ -69,7 +69,7 @@ class Navbar extends React.Component {
                 await this.handleFavorites(false);
               }}
             >
-              <MusicVideoIcon />
+              <MusicVideoIcon color="secondary"/>
             </Button>
           </Tooltip>
           <Tooltip title="Playlists">
@@ -80,7 +80,7 @@ class Navbar extends React.Component {
                 await this.handleFavorites(false);
               }}
             >
-              <QueueMusicIcon></QueueMusicIcon>
+              <QueueMusicIcon color="secondary"/>
             </Button>
           </Tooltip>
           <Tooltip title="Favorites">
@@ -91,12 +91,12 @@ class Navbar extends React.Component {
                 await this.handleFavorites(true);
               }}
             >
-              <StarsIcon />
+              <StarsIcon color="secondary"/>
             </Button>
           </Tooltip>
           <Tooltip title="Logout">
             <Button onClick={this.handleLogout}>
-              <PhonelinkEraseIcon />
+              <PhonelinkEraseIcon color="secondary"/>
             </Button>
           </Tooltip>
         </div>
@@ -105,7 +105,7 @@ class Navbar extends React.Component {
             <>
               <Tooltip title="Add Song">
                 <Button onClick={() => this.handleClickOpen()}>
-                  <QueuePlayNextIcon />
+                  <QueuePlayNextIcon color="secondary" />
                 </Button>
               </Tooltip>
               <Dialog
@@ -120,7 +120,7 @@ class Navbar extends React.Component {
           ) : playlistsEvent ? (
             <Tooltip title="Add Playlist">
               <Button>
-                <PlaylistAddIcon />
+                <PlaylistAddIcon color="secondary" />
               </Button>
             </Tooltip>
           ) : favoritesEvent ? (

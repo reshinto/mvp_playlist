@@ -31,7 +31,7 @@ class SongList extends React.Component {
   handleTitleClick = id => {
     const iframe = document.getElementById(`${id}`);
     if (iframe.style.display === "none") {
-      iframe.style.display = "block";
+      iframe.style.display = "inline-block";
     } else {
       iframe.style.display = "none";
     }
@@ -52,7 +52,7 @@ class SongList extends React.Component {
                     {" "}
                     <Tooltip title="Edit">
                       <Button onClick={() => this.handleClickOpen(song.id)}>
-                        <EditIcon fontSize="small" />
+                        <EditIcon fontSize="small" color="secondary" />
                       </Button>
                     </Tooltip>
                     <Dialog
@@ -69,7 +69,7 @@ class SongList extends React.Component {
                           window.location.reload(false);
                         }}
                       >
-                        <DeleteForeverIcon fontSize="small" />
+                        <DeleteForeverIcon fontSize="small" color="secondary" />
                       </Button>
                     </Tooltip>
                   </span>
