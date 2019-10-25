@@ -9,7 +9,11 @@ function Register() {
     <div>
       <h1>Register</h1>
       <LoginForm type="Register" />
-      <Button fullWidth onClick={() => goTo(Login, {message: "From register page"})}>
+      <Button
+        fullWidth
+        style={{backgroundColor: "white", marginTop: "50px"}}
+        onClick={() => goTo(Login, {message: "From register page"})}
+      >
         Login
       </Button>
     </div>

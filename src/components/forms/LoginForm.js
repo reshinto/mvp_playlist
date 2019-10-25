@@ -33,7 +33,7 @@ class LoginForm extends React.Component {
     const {isAuthenticated} = this.props.auth;
     if (isAuthenticated) goTo(Home, {message: "From login page"});
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form style={{backgroundColor: "white"}} onSubmit={this.handleSubmit}>
         <TextField
           type="text"
           name="username"
