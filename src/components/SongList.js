@@ -7,6 +7,7 @@ import EditIcon from "@material-ui/icons/Edit";
 import Button from "@material-ui/core/Button";
 import Tooltip from "@material-ui/core/Tooltip";
 import AddVideoForm from "./forms/AddVideoForm";
+import SimpleExpansionPanel from "./SimpleExpansionPanel";
 // import YouTubeVideo from "./YouTubeVideo";
 
 class SongList extends React.Component {
@@ -25,7 +26,6 @@ class SongList extends React.Component {
 
   handleClose = async () => {
     await this.setState({open: false});
-    window.location.reload(false);
   };
 
   handleTitleClick = id => {
@@ -96,6 +96,7 @@ class SongList extends React.Component {
                   allow="encrypted-media"
                   allowfullscreen="true"
                 ></iframe>
+                {/*<SimpleExpansionPanel songId={song.id}/>*/}
                 <hr />
               </div>
             ))
