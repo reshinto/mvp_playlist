@@ -83,7 +83,8 @@ class SongList extends React.Component {
                   src={`${song.video_link}?fs=1
                   &rel=0
                   &modestbranding=1
-                  &enablejsapi=1`}
+                  &enablejsapi=1
+                  &autoplay=1`}
                   frameborder="0"
                   allow="encrypted-media"
                   allowfullscreen="true"
