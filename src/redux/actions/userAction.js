@@ -3,7 +3,6 @@ import * as actionTypes from "../types";
 import {db, tokenConfig} from "../utility";
 
 export const getUser = () => (dispatch, state) => {
-  console.log("getUser working")
   axios
     .get(`${db}/users/user`, tokenConfig(state))
     .then(res => {

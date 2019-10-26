@@ -42,7 +42,6 @@ export const editSong = (title, artist, video_link, id) => (
   dispatch,
   state,
 ) => {
-  console.log("id", id)
   axios
     .put(
       `${db}/users/user/songs`,

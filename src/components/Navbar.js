@@ -6,9 +6,11 @@ import StarIcon from '@material-ui/icons/Star';
 import PhonelinkEraseIcon from "@material-ui/icons/PhonelinkErase";
 import QueuePlayNextIcon from "@material-ui/icons/QueuePlayNext";
 import PlaylistAddIcon from "@material-ui/icons/PlaylistAdd";
+import SubscriptionsIcon from '@material-ui/icons/Subscriptions';
 import Dialog from "@material-ui/core/Dialog";
 import Button from "@material-ui/core/Button";
 import Tooltip from "@material-ui/core/Tooltip";
+import CurrentSong from "../components/CurrentSong";
 import SongList from "../components/SongList";
 import AddVideoForm from "../components/forms/AddVideoForm";
 
@@ -17,7 +19,8 @@ class Navbar extends React.Component {
     songsEvent: true,
     playlistsEvent: false,
     favoritesEvent: false,
-    open: false,
+    videoFormOpen: false,
+    songListOpen: false,
   };
 
   handleSongs = async value => {
@@ -34,16 +37,20 @@ class Navbar extends React.Component {
 
   handleLogout = () => {
     localStorage.clear();
-    window.location.reload();
+    window.location.reload(false);
   };
 
-  handleClickOpen = async () => {
-    await this.setState({open: true});
+  handleClickVideoFormOpen = async () => {
+    await this.setState({videoFormOpen: true});
+  };
+
+  handleClickSongListOpen = async () => {
+    await this.setState({songListOpen: true});
   };
 
   handleClose = async () => {
-    await this.setState({open: false});
-    window.location.reload(false);
+    await this.setState({videoFormOpen: false});
+    await this.setState({songListOpen: false});
   };
 
   render() {
@@ -104,19 +111,31 @@ class Navbar extends React.Component {
         <div style={{marginTop: "20px"}}>
           {songsEvent ? (
             <>
+              <Tooltip title="View Song List">
+                <Button onClick={() => this.handleClickSongListOpen()}>
+                  <SubscriptionsIcon color="secondary" />
+                </Button>
+              </Tooltip>
+              <Dialog
+                open={this.state.songListOpen}
+                onClose={this.handleClose}
+                aria-labelledby="form-dialog-title"
+              >
+                <SongList />
+              </Dialog>
               <Tooltip title="Add Song">
-                <Button onClick={() => this.handleClickOpen()}>
+                <Button onClick={() => this.handleClickVideoFormOpen()}>
                   <QueuePlayNextIcon color="secondary" />
                 </Button>
               </Tooltip>
               <Dialog
-                open={this.state.open}
+                open={this.state.videoFormOpen}
                 onClose={this.handleClose}
                 aria-labelledby="form-dialog-title"
               >
-                <AddVideoForm type="Add" />
+                <AddVideoForm type="Add" clickSubmit={this.handleClose}/>
               </Dialog>
-              <SongList />
+              <CurrentSong />
             </>
           ) : playlistsEvent ? (
             <Tooltip title="Add Playlist">

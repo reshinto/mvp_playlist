@@ -119,7 +119,11 @@ const setAuthorizationHeader = token => {
   const authToken = token;
   localStorage.setItem("authToken", authToken);
   localStorage.setItem("isAuthenticated", "true");
+  localStorage.setItem("isUpdated", "false")
   localStorage.setItem("title", "");
   localStorage.setItem("artist", "");
-  localStorage.setItem("url", "");
+  localStorage.setItem("video_link", "");
+  localStorage.setItem("currentIndex", 0);
+  localStorage.setItem("songId", "");
+  localStorage.setItem("videoId", "");
 };

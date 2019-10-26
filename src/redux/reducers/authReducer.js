@@ -1,34 +1,6 @@
 import * as actionTypes from "../types";
 import {updateObject} from "../utility";
 
-// const initialState = {
-//   users: {},
-//   isAuthenticated: false,
-// };
-
-// const getInfo = (state, action) => {
-//   return updateObject(state, {
-//     users: action.payload,
-//   });
-// };
-
-// const loginSuccess = (state, action) => {
-//   return updateObject(state, {
-//     isAuthenticated: true
-//   });
-// };
-
-// const authReducer = (state = initialState, action) => {
-//   switch (action.type) {
-//     case actionTypes.GET_USERS:
-//       return getInfo(state, action);
-//     case actionTypes.POST_LOGIN:
-//       return loginSuccess(state, action);
-//     default:
-//       return state;
-//   }
-// };
-
 const initialState = {
   token: null,
   error: null,

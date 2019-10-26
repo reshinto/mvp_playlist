@@ -5,7 +5,6 @@ import { connect } from "react-redux";
 import {Router} from "react-chrome-extension-router";
 
 function Platform(props) {
-  // const {isAuthenticated} = props.auth;
   const isAuthenticated = localStorage.getItem("isAuthenticated");
   const token = localStorage.getItem("authToken");
   return (
@@ -21,9 +20,6 @@ const mapStateToProps = state => {
   };
 };
 
-// export default Platform;
 export default connect(
   mapStateToProps,
 )(Platform);
-
-// <Navbar />

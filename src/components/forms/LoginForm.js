@@ -17,7 +17,6 @@ class LoginForm extends React.Component {
     e.preventDefault();
     const {type} = this.props;
     const {username, email, password} = this.state;
-    console.log(username, password);
     if (type.toLowerCase() === "login") {
       this.props.login(username, password);
     } else {
