@@ -66,7 +66,6 @@ class AddVideoForm extends React.Component {
   };
 
   render() {
-    const {type} = this.props;
     localStorage.setItem("title", "");
     localStorage.setItem("video_link", "");
     localStorage.setItem("artist", "");
@@ -114,7 +113,7 @@ class AddVideoForm extends React.Component {
           }}
         >
           <Button fullWidth color="primary" type="submit">
-            {type}
+            Add
           </Button>
         </DialogActions>
       </form>
