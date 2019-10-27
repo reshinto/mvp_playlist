@@ -18,7 +18,6 @@ export const getSongs = () => (dispatch, state) => {
 
 export const getSong = id => (dispatch, state) => {
   const token = localStorage.getItem("authToken");
-  console.log("getSong id", id)
   localStorage.setItem("currentId", id);
   axios
     .get(`${db}/users/user/song`, {params: {id},
