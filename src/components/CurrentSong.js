@@ -22,6 +22,11 @@ class CurrentSong extends React.Component {
       width: "300",
       playerVars: {
         autoplay: 1,
+        rel: 0,
+        modestbranding: 1,
+        iv_load_policy: 3,
+        disablekb: 1,
+        cc_load_policy: 0,
       },
     },
     videoId: "",
@@ -31,6 +36,18 @@ class CurrentSong extends React.Component {
 
   componentDidMount() {
     this.props.getSongs();
+    this.interval = setInterval(() => {
+      if (this.state.videoId !== localStorage.getItem("videoId"))
+        this.onPauseVideo();
+        this.setState({
+          videoId: localStorage.getItem("videoId"),
+        });
+        setTimeout(() => this.onPlayVideo(), 200);
+    }, 100);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.interval);
   }
 
   onReady = async event => {

@@ -27,7 +27,7 @@ class SongList extends React.Component {
     this.props.getSong(id);
     setTimeout(() => {
       this.setState({open: true, currentId: id});
-    }, 150)
+    }, 500);
   };
 
   handleClose = async () => {
@@ -37,68 +37,21 @@ class SongList extends React.Component {
 
   handleTitleClick = async (id, videoIndex) => {
     const {songs} = this.props;
-    const text = document.getElementById(`text${id}`);
-    if (songs.length > 0) {
-      for (let i = 0; i < songs.length; i++) {
-        const _text = document.getElementById(`text${songs[i].id}`);
-        if (_text.style.color === "rgb(245, 0, 87)") {
-          _text.style.color = "white";
-        }
-      }
-      if (text.style.color === "white") {
-        text.style.color = "#f50057";
-        await this.setState({
-          videoId: this.props.songs[videoIndex].video_link,
-          currentIndex: videoIndex,
-        });
-      }
-    }
-  };
-
-  onReady = async event => {
-    // access to player in all event handlers via event.target
-    await this.setState({player: event.target});
-  };
-
-  onPlayVideo = () => {
-    this.state.player.playVideo();
-  };
-
-  onPauseVideo = () => {
-    this.state.play.pauseVideo();
-  };
-
-  onChangeVideo = async () => {
-    const {songs} = this.props;
-    const {currentIndex} = this.state;
-    let last = 0;
-    if (songs !== null && songs !== undefined) {
-      if (songs.length > 0) {
-        for (let i = 0; i < songs.length; i++) {
-          const _text = document.getElementById(`text${songs[i].id}`);
-          if (_text.style.color === "rgb(245, 0, 87)") {
-            _text.style.color = "black";
-          }
-        }
-        if (currentIndex < songs.length) {
-          if (currentIndex === songs.length - 1) last = 1;
-          const text = document.getElementById(
-            `text${songs[currentIndex + 1 - last].id}`,
-          );
-          if (text.style.color === "black") {
-            text.style.color = "#f50057";
-          }
-          await this.setState({
-            videoId: songs[currentIndex + 1 - last].video_link,
-            currentIndex: currentIndex + 1 - last,
-          });
-        }
-      }
-    }
+    document.getElementById(
+      `text${localStorage.getItem("songId")}`,
+    ).style.color = "black";
+    document.getElementById(`text${id}`).style.color = "#f50057";
+    localStorage.setItem("currentIndex", videoIndex);
+    localStorage.setItem("songId", songs[videoIndex].id);
+    localStorage.setItem("songTitle", songs[videoIndex].title);
+    localStorage.setItem("videoId", songs[videoIndex].video_link);
   };
 
   render() {
     const {songs} = this.props;
+    const currentSongId = localStorage.getItem("songId");
+    const currentElement = document.getElementById(`text${currentSongId}`);
+    if (currentElement !== null) currentElement.style.color = "#f50057";
     return (
       <div style={{overflowY: "scroll"}}>
         {songs.length > 0
@@ -108,7 +61,9 @@ class SongList extends React.Component {
                   <Button
                     id={`text${song.id}`}
                     style={{color: "black"}}
-                    onClick={() => this.handleTitleClick(song.id, i)}
+                    onClick={() => {
+                      this.handleTitleClick(song.id, i);
+                    }}
                   >
                     {song.title} - {song.artist}
                   </Button>
