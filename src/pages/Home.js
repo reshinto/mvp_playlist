@@ -18,7 +18,7 @@ class Home extends React.Component {
         <div
           style={{visibility: "hidden", position: "absolute", top: "0"}}
         >
-          <AddVideoForm type="Add" />
+          <AddVideoForm />
         </div>
       </div>
     );

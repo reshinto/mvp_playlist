@@ -1,6 +1,6 @@
 import React from "react";
 import {connect} from "react-redux";
-import {getSongs, deleteSong} from "../redux/actions/songAction";
+import {getSongs, getSong, deleteSong} from "../redux/actions/songAction";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
@@ -8,7 +8,7 @@ import EditIcon from "@material-ui/icons/Edit";
 import StarIcon from "@material-ui/icons/Star";
 import Button from "@material-ui/core/Button";
 import Tooltip from "@material-ui/core/Tooltip";
-import AddVideoForm from "./forms/AddVideoForm";
+import EditVideoForm from "./forms/EditVideoForm";
 
 class SongList extends React.Component {
   state = {
@@ -23,8 +23,11 @@ class SongList extends React.Component {
     this.props.getSongs();
   }
 
-  handleClickOpen = async id => {
-    await this.setState({open: true, currentId: id});
+  handleClickOpen = id => {
+    this.props.getSong(id);
+    setTimeout(() => {
+      this.setState({open: true, currentId: id});
+    }, 150)
   };
 
   handleClose = async () => {
@@ -116,7 +119,11 @@ class SongList extends React.Component {
                   </Button>
                 </Tooltip>
                 <Tooltip title="Edit">
-                  <Button onClick={() => this.handleClickOpen(song.id)}>
+                  <Button
+                    onClick={() => {
+                      this.handleClickOpen(song.id);
+                    }}
+                  >
                     <EditIcon fontSize="small" color="secondary" />
                   </Button>
                 </Tooltip>
@@ -125,8 +132,7 @@ class SongList extends React.Component {
                   onClose={this.handleClose}
                   aria-labelledby="form-dialog-title"
                 >
-                  <AddVideoForm
-                    type="Edit"
+                  <EditVideoForm
                     songId={this.state.currentId}
                     clickSubmit={this.handleClose}
                   />
@@ -157,6 +163,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = {
+  getSong: songId => getSong(songId),
   getSongs,
   deleteSong,
 };

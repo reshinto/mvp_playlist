@@ -61,6 +61,7 @@ class LoginForm extends React.Component {
         <TextField
           type="password"
           name="password"
+          value={password}
           onChange={this.onChange("password")}
           margin="dense"
           label="Password"

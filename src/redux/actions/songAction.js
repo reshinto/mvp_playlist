@@ -16,6 +16,24 @@ export const getSongs = () => (dispatch, state) => {
     });
 };
 
+export const getSong = id => (dispatch, state) => {
+  const token = localStorage.getItem("authToken");
+  console.log("getSong id", id)
+  localStorage.setItem("currentId", id);
+  axios
+    .get(`${db}/users/user/song`, {params: {id},
+      headers: {authorization: token}})
+    .then(res => {
+      dispatch({
+        type: actionTypes.GET_SONG,
+        payload: res.data,
+      });
+    })
+    .catch(err => {
+      console.log(err);
+    });
+};
+
 export const addSong = (title, artist, video_link) => (dispatch, state) => {
   axios
     .post(

@@ -3,6 +3,7 @@ import {updateObject} from "../utility";
 
 const initialState = {
   songs: {},
+  song: {}
 };
 
 const getSongs = (state, action) => {
@@ -11,10 +12,18 @@ const getSongs = (state, action) => {
   });
 };
 
+const getSong = (state, action) => {
+  return updateObject(state, {
+    song: action.payload,
+  });
+};
+
 const songReducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.GET_SONGS:
       return getSongs(state, action);
+    case actionTypes.GET_SONG:
+      return getSong(state, action);
     default:
       return state;
   }

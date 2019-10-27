@@ -133,7 +133,7 @@ class Navbar extends React.Component {
                 onClose={this.handleClose}
                 aria-labelledby="form-dialog-title"
               >
-                <AddVideoForm type="Add" clickSubmit={this.handleClose}/>
+                <AddVideoForm clickSubmit={this.handleClose}/>
               </Dialog>
               <CurrentSong />
             </>
