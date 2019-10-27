@@ -16,7 +16,12 @@ class AddVideoForm extends React.Component {
   };
 
   componentDidMount() {
-    window.addEventListener("storage", this.handleStorageToState);
+    this.interval = setInterval(this.handleStorageToState, 100);
+    // window.addEventListener("storage", this.handleStorageToState);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.interval);
   }
 
   handleSubmit = e => {
@@ -54,21 +59,16 @@ class AddVideoForm extends React.Component {
       this.setState(state => ({title}));
     }
     if (video_link !== "") {
-      setTimeout(() => {
-        localStorage.setItem("isUpdated", "true");
-        this.setState(state => ({video_link}));
-      }, 50);
+      localStorage.setItem("isUpdated", "true");
+      this.setState(state => ({video_link}));
     }
-    if (title !== "" && video_link !== "")
-      setTimeout(() => {
-        this._handleSubmit();
-      }, 100);
+    if (title !== "" && video_link !== "") this._handleSubmit();
   };
 
   render() {
-    localStorage.setItem("title", "");
-    localStorage.setItem("video_link", "");
-    localStorage.setItem("artist", "");
+    // localStorage.setItem("title", "");
+    // localStorage.setItem("video_link", "");
+    // localStorage.setItem("artist", "");
     const {title, artist, video_link} = this.state;
     return (
       <form onSubmit={this.handleSubmit}>
