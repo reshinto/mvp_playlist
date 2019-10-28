@@ -17,7 +17,7 @@ chrome.browserAction.onClicked.addListener(tab => {
     window.open(
       "index.html",
       "popUpWindow",
-      `height=500,width=400,left=${window.screen.width -
+      `height=550,width=400,left=${window.screen.width -
         500},top=100,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no, status=yes`,
     );
   }
