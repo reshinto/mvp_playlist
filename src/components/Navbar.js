@@ -1,26 +1,38 @@
 import React from "react";
+import {connect} from "react-redux";
 import MusicVideoIcon from "@material-ui/icons/MusicVideo";
 import QueueMusicIcon from "@material-ui/icons/QueueMusic";
 import StarsIcon from "@material-ui/icons/Stars";
-import StarIcon from '@material-ui/icons/Star';
+import StarIcon from "@material-ui/icons/Star";
 import PhonelinkEraseIcon from "@material-ui/icons/PhonelinkErase";
 import QueuePlayNextIcon from "@material-ui/icons/QueuePlayNext";
 import PlaylistAddIcon from "@material-ui/icons/PlaylistAdd";
-import SubscriptionsIcon from '@material-ui/icons/Subscriptions';
+import ListIcon from '@material-ui/icons/List';
+import SubscriptionsIcon from "@material-ui/icons/Subscriptions";
 import Dialog from "@material-ui/core/Dialog";
 import Button from "@material-ui/core/Button";
 import Tooltip from "@material-ui/core/Tooltip";
 import CurrentSong from "../components/CurrentSong";
-import SongList from "../components/SongList";
+import SongList from "../components/lists/SongList";
+import Playlist from "../components/lists/Playlist";
 import AddVideoForm from "../components/forms/AddVideoForm";
+import AddPlaylistForm from "../components/forms/AddPlaylistForm";
+
+const navTitle = {
+  songsEvent: "Songs List",
+  playlistsEvent: "Playlists",
+  favoritesEvent: "Favorites",
+};
 
 class Navbar extends React.Component {
   state = {
+    currentEvent: "songsEvent",
     songsEvent: true,
     playlistsEvent: false,
     favoritesEvent: false,
     videoFormOpen: false,
     songListOpen: false,
+    playlistFormOpen: false,
   };
 
   handleSongs = async value => {
@@ -48,13 +60,23 @@ class Navbar extends React.Component {
     await this.setState({songListOpen: true});
   };
 
+  handleClickPlayListOpen = async () => {
+    await this.setState({playlistFormOpen: true});
+  };
+
   handleClose = async () => {
     await this.setState({videoFormOpen: false});
     await this.setState({songListOpen: false});
   };
 
   render() {
-    const {songsEvent, playlistsEvent, favoritesEvent} = this.state;
+    const {user} = this.props;
+    const {
+      currentEvent,
+      songsEvent,
+      playlistsEvent,
+      favoritesEvent,
+    } = this.state;
     return (
       <div
         style={{
@@ -62,6 +84,9 @@ class Navbar extends React.Component {
           flexDirection: "column",
         }}
       >
+        <h1>
+          {user.length > 0 ? user[0].username : ""} {navTitle[currentEvent]}
+        </h1>
         <div
           style={{
             display: "flex",
@@ -72,6 +97,7 @@ class Navbar extends React.Component {
           <Tooltip title="Songs">
             <Button
               onClick={async () => {
+                this.setState({currentEvent: "songsEvent"});
                 await this.handleSongs(true);
                 await this.handlePlaylists(false);
                 await this.handleFavorites(false);
@@ -83,6 +109,7 @@ class Navbar extends React.Component {
           <Tooltip title="Playlists">
             <Button
               onClick={async () => {
+                this.setState({currentEvent: "playlistsEvent"});
                 await this.handleSongs(false);
                 await this.handlePlaylists(true);
                 await this.handleFavorites(false);
@@ -94,6 +121,7 @@ class Navbar extends React.Component {
           <Tooltip title="Favorites">
             <Button
               onClick={async () => {
+                this.setState({currentEvent: "favoritesEvent"});
                 await this.handleSongs(false);
                 await this.handlePlaylists(false);
                 await this.handleFavorites(true);
@@ -133,16 +161,37 @@ class Navbar extends React.Component {
                 onClose={this.handleClose}
                 aria-labelledby="form-dialog-title"
               >
-                <AddVideoForm clickSubmit={this.handleClose}/>
+                <AddVideoForm clickSubmit={this.handleClose} />
               </Dialog>
               <CurrentSong />
             </>
           ) : playlistsEvent ? (
-            <Tooltip title="Add Playlist">
-              <Button>
-                <PlaylistAddIcon color="secondary" />
-              </Button>
-            </Tooltip>
+            <>
+              <Tooltip title="View Playlists">
+                <Button onClick={() => this.handleClickPlaylistListOpen()}>
+                  <ListIcon color="secondary" />
+                </Button>
+              </Tooltip>
+              <Dialog
+                open={this.state.playlistOpen}
+                onClose={this.handleClose}
+                aria-labelledby="form-dialog-title"
+              >
+                <Playlist />
+              </Dialog>
+              <Tooltip title="Add Playlist">
+                <Button onClick={() => this.handleClickPlaylistFormOpen()}>
+                  <PlaylistAddIcon color="secondary" />
+                </Button>
+              </Tooltip>
+              <Dialog
+                open={this.state.playlistFormOpen}
+                onClose={this.handleClose}
+                aria-labelledby="form-dialog-title"
+              >
+                <AddPlaylistForm clickSubmit={this.handleClose} />
+              </Dialog>
+            </>
           ) : favoritesEvent ? (
             <Tooltip title="Add Like">
               <Button>
@@ -158,4 +207,10 @@ class Navbar extends React.Component {
   }
 }
 
-export default Navbar;
+const mapStateToProps = state => {
+  return {
+    user: state.userReducer.user,
+  };
+};
+
+export default connect(mapStateToProps)(Navbar);

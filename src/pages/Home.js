@@ -4,38 +4,23 @@ import {getUser} from "../redux/actions/userAction";
 import Navbar from "../components/Navbar";
 import AddVideoForm from "../components/forms/AddVideoForm";
 
-class Home extends React.Component {
-  componentDidMount() {
-    this.props.getUser();
-  }
-
-  render() {
-    const {user} = this.props;
-    return (
-      <div>
-        <h1>{user.length > 0 ? user[0].username : ""} Songs List</h1>
-        <Navbar />
-        <div
-          style={{visibility: "hidden", position: "absolute", top: "0"}}
-        >
-          <AddVideoForm />
-        </div>
+function Home(props) {
+  props.getUser();
+  return (
+    <>
+      <Navbar />
+      <div style={{visibility: "hidden", position: "absolute", top: "0"}}>
+        <AddVideoForm />
       </div>
-    );
-  }
+    </>
+  );
 }
-
-const mapStateToProps = state => {
-  return {
-    user: state.userReducer.user,
-  };
-};
 
 const mapDispatchToProps = {
   getUser,
 };
 
 export default connect(
-  mapStateToProps,
+  null,
   mapDispatchToProps,
 )(Home);
