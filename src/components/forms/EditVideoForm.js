@@ -39,15 +39,13 @@ class EditVideoForm extends React.Component {
 
   render() {
     let {title, artist, video_link} = this.state;
-    const {song} = this.props;
     if (title === "") {
+      const {song} = this.props;
       if (song.length > 0) {
-        const {song} = this.props;
-        let {title, artist, video_link} = song[0];
         this.setState(state => ({
-          title: state.title + title,
-          artist: state.artist + artist,
-          video_link: state.video_link + video_link,
+          title: state.title + song[0].title,
+          artist: state.artist + song[0].artist,
+          video_link: state.video_link + song[0].video_link,
         }));
       }
     }
