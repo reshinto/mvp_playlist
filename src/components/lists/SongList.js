@@ -1,14 +1,13 @@
 import React from "react";
 import {connect} from "react-redux";
-import {getSongs, getSong, deleteSong} from "../redux/actions/songAction";
-import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
-import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
-import EditIcon from "@material-ui/icons/Edit";
-import StarIcon from "@material-ui/icons/Star";
+// import StarIcon from "@material-ui/icons/Star";
 import Button from "@material-ui/core/Button";
-import Tooltip from "@material-ui/core/Tooltip";
-import EditVideoForm from "./forms/EditVideoForm";
+// import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
+// import ToggleButton from '@material-ui/lab/ToggleButton';
+import {getSongs, getSong, deleteSong} from "../../redux/actions/songAction";
+import Delete from "../controls/Delete";
+import Edit from "../controls/Edit";
 
 class SongList extends React.Component {
   state = {
@@ -16,7 +15,7 @@ class SongList extends React.Component {
     currentId: 0,
     videoId: "",
     currentIndex: 0,
-    player: null,
+    // selected: false,
   };
 
   componentDidMount() {
@@ -68,40 +67,34 @@ class SongList extends React.Component {
                     {song.title} - {song.artist}
                   </Button>
                 </h3>
-                <Tooltip title="Like">
-                  <Button>
-                    <StarIcon fontSize="small" color="secondary" />
-                  </Button>
-                </Tooltip>
-                <Tooltip title="Edit">
-                  <Button
-                    onClick={() => {
-                      this.handleClickOpen(song.id);
-                    }}
-                  >
-                    <EditIcon fontSize="small" color="secondary" />
-                  </Button>
-                </Tooltip>
-                <Dialog
-                  open={this.state.open}
-                  onClose={this.handleClose}
-                  aria-labelledby="form-dialog-title"
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-around",
+                    alignItems: "center",
+                  }}
                 >
-                  <EditVideoForm
-                    songId={this.state.currentId}
-                    clickSubmit={this.handleClose}
+                  {/*
+                  <Tooltip title="Like">
+                    <Button>
+                      <StarIcon fontSize="small" color="secondary" />
+                    </Button>
+                  </Tooltip>
+                  */}
+                  <Edit
+                    currentId={this.state.currentId}
+                    handleClose={this.handleClose}
+                    handleClickOpen={this.handleClickOpen}
+                    id={song.id}
+                    open={this.state.open}
+                    type="video"
                   />
-                </Dialog>
-                <Tooltip title="Delete">
-                  <Button
-                    onClick={async () => {
-                      await this.props.deleteSong(song.id);
-                      this.props.getSongs();
-                    }}
-                  >
-                    <DeleteForeverIcon fontSize="small" color="secondary" />
-                  </Button>
-                </Tooltip>
+                  <Delete
+                    delete={this.props.deleteSong}
+                    getData={this.props.getSongs}
+                    id={song.id}
+                  />
+                </div>
                 <hr />
               </DialogContent>
             ))

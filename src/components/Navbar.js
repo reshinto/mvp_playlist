@@ -7,7 +7,7 @@ import StarIcon from "@material-ui/icons/Star";
 import PhonelinkEraseIcon from "@material-ui/icons/PhonelinkErase";
 import QueuePlayNextIcon from "@material-ui/icons/QueuePlayNext";
 import PlaylistAddIcon from "@material-ui/icons/PlaylistAdd";
-import ListIcon from '@material-ui/icons/List';
+import ListIcon from "@material-ui/icons/List";
 import SubscriptionsIcon from "@material-ui/icons/Subscriptions";
 import Dialog from "@material-ui/core/Dialog";
 import Button from "@material-ui/core/Button";
@@ -32,6 +32,7 @@ class Navbar extends React.Component {
     favoritesEvent: false,
     videoFormOpen: false,
     songListOpen: false,
+    playlistsOpen: false,
     playlistFormOpen: false,
   };
 
@@ -60,13 +61,21 @@ class Navbar extends React.Component {
     await this.setState({songListOpen: true});
   };
 
-  handleClickPlayListOpen = async () => {
+  handleClickPlaylistsOpen = async () => {
+    await this.setState({playlistsOpen: true});
+  };
+
+  handleClickPlaylistFormOpen = async () => {
     await this.setState({playlistFormOpen: true});
   };
 
   handleClose = async () => {
-    await this.setState({videoFormOpen: false});
-    await this.setState({songListOpen: false});
+    await this.setState({
+      videoFormOpen: false,
+      songListOpen: false,
+      playlistsOpen: false,
+      playlistFormOpen: false,
+    });
   };
 
   render() {
@@ -168,12 +177,12 @@ class Navbar extends React.Component {
           ) : playlistsEvent ? (
             <>
               <Tooltip title="View Playlists">
-                <Button onClick={() => this.handleClickPlaylistListOpen()}>
+                <Button onClick={() => this.handleClickPlaylistsOpen()}>
                   <ListIcon color="secondary" />
                 </Button>
               </Tooltip>
               <Dialog
-                open={this.state.playlistOpen}
+                open={this.state.playlistsOpen}
                 onClose={this.handleClose}
                 aria-labelledby="form-dialog-title"
               >

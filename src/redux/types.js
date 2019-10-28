@@ -5,12 +5,19 @@ export const AUTH_FAIL = "AUTH_FAIL";
 export const AUTH_LOGOUT = "AUTH_LOGOUT";
 export const CLEAR_ERRORS = "CLEAR_ERRORS";
 
-// Get user details
+// User details
 export const GET_USER = "GET_USER";
 
-// Get songs
+// Songs
 export const GET_SONGS = "GET_SONGS";
 export const GET_SONG = "GET_SONG";
 export const ADD_SONG = "ADD_SONG";
 export const EDIT_SONG = "EDIT_SONG";
 export const DELETE_SONG = "DELETE_SONG";
+
+// Playlists
+export const GET_PLAYLISTS = "GET_PLAYLISTS";
+export const GET_PLAYLIST = "GET_PLAYLIST";
+export const ADD_PLAYLIST = "ADD_PLAYLIST";
+export const EDIT_PLAYLIST = "EDIT_PLAYLIST";
+export const DELETE_PLAYLIST = "DELETE_PLAYLIST";

@@ -29,12 +29,8 @@ class EditVideoForm extends React.Component {
   };
 
   submit = (title, artist, video_link, songId) => {
-    this.getSubmitType(title, artist, video_link, songId);
+    this.props.editSong(title, artist, video_link, songId);
     this.props.clickSubmit();
-  };
-
-  getSubmitType = async (title, artist, video_link, songId) => {
-    return await this.props.editSong(title, artist, video_link, songId);
   };
 
   render() {

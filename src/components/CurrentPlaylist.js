@@ -16,7 +16,7 @@ import Previous from "./controls/Previous";
 // import Shuffle from "./controls/Shuffle";
 // import Loop from "./controls/Loop";
 
-class CurrentSong extends React.Component {
+class CurrentPlaylist extends React.Component {
   state = {
     open: false,
     opts: {
@@ -176,4 +176,4 @@ const mapDispatchToProps = {
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(CurrentSong);
+)(CurrentPlaylist);

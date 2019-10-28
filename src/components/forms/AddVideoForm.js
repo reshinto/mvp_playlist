@@ -3,7 +3,6 @@ import {connect} from "react-redux";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import {addSong} from "../../redux/actions/songAction";
-import {getSongs} from "../../redux/actions/songAction";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogActions from "@material-ui/core/DialogActions";
 
@@ -30,26 +29,21 @@ class AddVideoForm extends React.Component {
   };
 
   _handleSubmit = () => {
-    const {songId} = this.props;
     const {title, artist, video_link} = this.state;
-    this.submit(title, artist, video_link, songId);
+    this.submit(title, artist, video_link);
   };
 
   onChange = prop => e => {
     this.setState({[prop]: e.target.value});
   };
 
-  submit = (title, artist, video_link, songId) => {
-    this.getSubmitType(title, artist, video_link, songId);
+  submit = (title, artist, video_link) => {
+    this.props.addSong(title, artist, video_link);
     localStorage.setItem("title", "");
     localStorage.setItem("video_link", "");
     if (localStorage.getItem("isUpdated") === "false")
       return this.props.clickSubmit();
     localStorage.setItem("isUpdated", "false");
-  };
-
-  getSubmitType = async (title, artist, video_link, songId) => {
-    return await this.props.addSong(title, artist, video_link);
   };
 
   handleStorageToState = () => {
@@ -66,9 +60,6 @@ class AddVideoForm extends React.Component {
   };
 
   render() {
-    // localStorage.setItem("title", "");
-    // localStorage.setItem("video_link", "");
-    // localStorage.setItem("artist", "");
     const {title, artist, video_link} = this.state;
     return (
       <form onSubmit={this.handleSubmit}>
@@ -122,7 +113,6 @@ class AddVideoForm extends React.Component {
 }
 
 const mapDispatchToProps = {
-  getSongs,
   addSong: (title, artist, video_link) => addSong(title, artist, video_link),
 };
 
