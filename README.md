@@ -43,6 +43,8 @@
 
 ## Backend server link
 * https://github.com/reshinto/mvp_playlist_server
+* Please note that the live backend server is runned on Heroku
+  * Therefore, if it is in sleep mode, it might take a while for it to respond initially before waking up.
 
 ## Sample Images
 ![Player](./images/player.png)
