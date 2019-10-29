@@ -27,7 +27,7 @@
   ```
   chrome://extensions/
   ```
-  * Run as developer mode then click on the load unpacked button and upload the build file where the manifest.json is located
+  * Run as developer mode then click on the load unpacked button and upload the build folder where the manifest.json is located
   * This will install this chrome extension to your chrome browser
   * Once installed, you can use it straight away as it has already been configured to connect to the live backend server
 ### Option 2
