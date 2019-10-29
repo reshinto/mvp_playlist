@@ -6,6 +6,7 @@ import authReducer from "./reducers/authReducer";
 import userReducer from "./reducers/userReducer";
 import songReducer from "./reducers/songReducer";
 import playlistReducer from "./reducers/playlistReducer";
+import playlistSongReducer from "./reducers/playlistSongReducer";
 
 const initialState = {};
 
@@ -16,6 +17,7 @@ const reducers = combineReducers({
   userReducer,
   songReducer,
   playlistReducer,
+  playlistSongReducer,
 });
 
 const enhancer = composeWithDevTools(applyMiddleware(...middleware));

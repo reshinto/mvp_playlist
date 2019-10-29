@@ -1,27 +1,24 @@
 import React from "react";
 import {connect} from "react-redux";
 import YouTube from "react-youtube";
-import {getSongs, deleteSong} from "../redux/actions/songAction";
-// import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
-// import Dialog from "@material-ui/core/Dialog";
-// import EditIcon from "@material-ui/icons/Edit";
-// import StarIcon from "@material-ui/icons/Star";
-import Button from "@material-ui/core/Button";
-import Tooltip from "@material-ui/core/Tooltip";
-// import AddVideoForm from "./forms/AddVideoForm";
+import {
+  getPlaylistSongs,
+  deletePlaylistSong,
+} from "../redux/actions/playlistSongAction";
 import Play from "./controls/Play";
 import Pause from "./controls/Pause";
 import Next from "./controls/Next";
 import Previous from "./controls/Previous";
 // import Shuffle from "./controls/Shuffle";
 // import Loop from "./controls/Loop";
+import SelectPlaylist from "./controls/SelectPlaylist";
 
 class CurrentPlaylist extends React.Component {
   state = {
     open: false,
     opts: {
-      height: `${Math.floor(window.innerWidth / 10 * 6)}`,
-      width: `${Math.floor(window.innerWidth / 10 * 9)}`,
+      height: `${Math.floor((window.innerWidth / 10) * 6)}`,
+      width: `${Math.floor((window.innerWidth / 10) * 9)}`,
       playerVars: {
         autoplay: 1,
         rel: 0,
@@ -31,19 +28,20 @@ class CurrentPlaylist extends React.Component {
         cc_load_policy: 0,
       },
     },
-    videoId: "",
+    playlistVideoId: "",
     playingStatus: false,
     player: null,
   };
 
   componentDidMount() {
-    this.props.getSongs();
+    this.props.getPlaylistSongs(localStorage.getItem("currentPlaylist"));
     this.interval = setInterval(() => {
-      if (this.state.videoId !== localStorage.getItem("videoId")) {
+      if (this.state.playlistVideoId !== localStorage.getItem("playlistVideoId")) {
         this.onPauseVideo();
         setTimeout(() => {
+          this.props.getPlaylistSongs(localStorage.getItem("currentPlaylist"));
           this.setState({
-            videoId: localStorage.getItem("videoId"),
+            playlistVideoId: localStorage.getItem("playlistVideoId"),
           });
         }, 100);
         setTimeout(() => this.onPlayVideo(), 250);
@@ -87,49 +85,72 @@ class CurrentPlaylist extends React.Component {
   };
 
   onChangeVideo = async num => {
-    const {songs} = this.props;
-    const currentIndex = parseInt(localStorage.getItem("currentIndex"));
-    if (songs.length > 0) {
-      if (currentIndex < songs.length) {
+    const {playlistSongs} = this.props;
+    const currentIndex = parseInt(
+      localStorage.getItem("currentPlaylistSongIndex"),
+    );
+    if (playlistSongs.length > 0) {
+      if (currentIndex < playlistSongs.length) {
         let newIndex = currentIndex + num;
         if (newIndex < 0) newIndex = 0;
-        else if (newIndex >= songs.length) newIndex = songs.length - 1;
-        localStorage.setItem("currentIndex", newIndex);
-        localStorage.setItem("songId", songs[newIndex].id);
-        localStorage.setItem("songTitle", songs[newIndex].title);
-        localStorage.setItem("videoId", songs[newIndex].video_link);
+        else if (newIndex >= playlistSongs.length)
+          newIndex = playlistSongs.length - 1;
+        localStorage.setItem("currentPlaylistSongIndex", newIndex);
+        localStorage.setItem(
+          "playlistSongId",
+          playlistSongs[newIndex].playlist_songs_id,
+        );
+        localStorage.setItem(
+          "playlistSongTitle",
+          playlistSongs[newIndex].title,
+        );
+        localStorage.setItem(
+          "playlistVideoId",
+          playlistSongs[newIndex].video_link,
+        );
         await this.setState({
-          videoId: songs[newIndex].video_link,
+          playlistVideoId: playlistSongs[newIndex].video_link,
         });
       }
     }
   };
 
   initializeFirstVideo = async () => {
-    const {songs} = this.props;
+    const {playlistSongs} = this.props;
     const currentIndex = 0;
-    if (songs.length > 0) {
-      localStorage.setItem("currentIndex", currentIndex);
-      localStorage.setItem("songId", songs[currentIndex].id);
-      localStorage.setItem("songTitle", songs[currentIndex].title);
-      localStorage.setItem("videoId", songs[currentIndex].video_link);
+    if (playlistSongs.length > 0) {
+      localStorage.setItem("currentPlaylistSongsIndex", currentIndex);
+      localStorage.setItem(
+        "playlistSongsId",
+        playlistSongs[currentIndex].playlist_songs_id,
+      );
+      localStorage.setItem(
+        "playlistSongId",
+        playlistSongs[currentIndex].song_id,
+      );
+      localStorage.setItem("playlistSongTitle", playlistSongs[currentIndex].title);
+      localStorage.setItem(
+        "playlistVideoId",
+        playlistSongs[currentIndex].video_link,
+      );
       await this.setState({
-        videoId: songs[currentIndex].video_link,
+        playlistVideoId: playlistSongs[currentIndex].video_link,
       });
     }
   };
 
   render() {
-    const {songs} = this.props;
-    const {opts, videoId, playingStatus} = this.state;
-    if (videoId === "") this.initializeFirstVideo();
+    const {playlistSongs} = this.props;
+    const {opts, playlistVideoId, playingStatus} = this.state;
+    if (playlistVideoId === "") this.initializeFirstVideo();
     return (
       <div>
-        {songs.length > 0 ? (
+        <SelectPlaylist />
+        {playlistSongs.length > 0 ? (
           <div>
             <div style={{margin: "10px auto"}}>
               <YouTube
-                videoId={videoId}
+                videoId={playlistVideoId}
                 opts={opts}
                 onReady={this.onReady}
                 onPlay={this.onPlayVideo}
@@ -151,7 +172,7 @@ class CurrentPlaylist extends React.Component {
               <Shuffle onShuffleVideo={this.onShuffleVideo} />
               */}
               <Next onNextVideo={this.onNextVideo} />
-              <h3>{localStorage.getItem("songTitle")}</h3>
+              <h3>{localStorage.getItem("playlistSongTitle")}</h3>
             </div>
           </div>
         ) : (
@@ -164,13 +185,13 @@ class CurrentPlaylist extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    songs: state.songReducer.songs,
+    playlistSongs: state.playlistSongReducer.playlistSongs,
   };
 };
 
 const mapDispatchToProps = {
-  getSongs,
-  deleteSong,
+  getPlaylistSongs: playlist_id => getPlaylistSongs(playlist_id),
+  deletePlaylistSong,
 };
 
 export default connect(

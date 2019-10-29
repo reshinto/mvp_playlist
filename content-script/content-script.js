@@ -1,1 +1,1 @@
-console.log('I am from content script.');
+// console.log('I am from content script.');

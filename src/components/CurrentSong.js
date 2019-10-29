@@ -6,8 +6,6 @@ import {getSongs, deleteSong} from "../redux/actions/songAction";
 // import Dialog from "@material-ui/core/Dialog";
 // import EditIcon from "@material-ui/icons/Edit";
 // import StarIcon from "@material-ui/icons/Star";
-import Button from "@material-ui/core/Button";
-import Tooltip from "@material-ui/core/Tooltip";
 // import AddVideoForm from "./forms/AddVideoForm";
 import Play from "./controls/Play";
 import Pause from "./controls/Pause";
@@ -95,7 +93,7 @@ class CurrentSong extends React.Component {
         if (newIndex < 0) newIndex = 0;
         else if (newIndex >= songs.length) newIndex = songs.length - 1;
         localStorage.setItem("currentIndex", newIndex);
-        localStorage.setItem("songId", songs[newIndex].id);
+        localStorage.setItem("songId", songs[newIndex].song_id);
         localStorage.setItem("songTitle", songs[newIndex].title);
         localStorage.setItem("videoId", songs[newIndex].video_link);
         await this.setState({
@@ -110,7 +108,7 @@ class CurrentSong extends React.Component {
     const currentIndex = 0;
     if (songs.length > 0) {
       localStorage.setItem("currentIndex", currentIndex);
-      localStorage.setItem("songId", songs[currentIndex].id);
+      localStorage.setItem("songId", songs[currentIndex].song_id);
       localStorage.setItem("songTitle", songs[currentIndex].title);
       localStorage.setItem("videoId", songs[currentIndex].video_link);
       await this.setState({

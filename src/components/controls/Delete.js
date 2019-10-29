@@ -9,7 +9,9 @@ function Delete(props) {
       <Button
         onClick={async () => {
           await props.delete(props.id);
-          props.getData();
+          setTimeout(() => {
+            props.getData();
+          }, 200)
         }}
       >
         <DeleteForeverIcon fontSize="small" color="secondary" />

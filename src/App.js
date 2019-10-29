@@ -1,11 +1,11 @@
-import React from 'react';
-import './App.css';
+import React from "react";
+import "./App.css";
 import Platform from "./components/Platform";
 
 function App() {
   return (
     <div className="App">
-        <Platform />
+      <Platform />
     </div>
   );
 }

@@ -6,7 +6,7 @@ export const updateObject = (oldObject, updatedProperties) => {
 };
 
 // Setup config with token - helper function
-export const tokenConfig = getState => {
+export const tokenConfig = (getState) => {
   // Headers
   const config = {
     headers: {
@@ -22,5 +22,5 @@ export const tokenConfig = getState => {
   return config;
 };
 
-// export const db = "http://localhost:8080" || "https://project2backendtest.herokuapp.com";
-export const db = "https://project2backendtest.herokuapp.com";
+// export const db = "http://localhost:8080";
+export const db = "https://mvp-playlist-server.herokuapp.com";

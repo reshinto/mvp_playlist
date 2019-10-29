@@ -41,13 +41,19 @@ class SongList extends React.Component {
     ).style.color = "black";
     document.getElementById(`text${id}`).style.color = "#f50057";
     localStorage.setItem("currentIndex", videoIndex);
-    localStorage.setItem("songId", songs[videoIndex].id);
+    localStorage.setItem("songId", songs[videoIndex].song_id);
     localStorage.setItem("songTitle", songs[videoIndex].title);
     localStorage.setItem("videoId", songs[videoIndex].video_link);
   };
 
   render() {
-    const {songs} = this.props;
+    let {songs} = this.props;
+    console.log(songs)
+    if (songs.length === undefined) {
+      songs = [{song_id: -1, title: "Searching for songs ..."}];
+    } else if (songs.length === 0) {
+      songs = [{song_id: -1, title: "No songs available."}];
+    }
     const currentSongId = localStorage.getItem("songId");
     const currentElement = document.getElementById(`text${currentSongId}`);
     if (currentElement !== null) currentElement.style.color = "#f50057";
@@ -55,46 +61,51 @@ class SongList extends React.Component {
       <div style={{overflowY: "scroll"}}>
         {songs.length > 0
           ? songs.map((song, i) => (
-              <DialogContent key={song.id}>
+              <DialogContent key={song.song_id}>
                 <h3>
                   <Button
-                    id={`text${song.id}`}
+                    id={`text${song.song_id}`}
                     style={{color: "black"}}
                     onClick={() => {
-                      this.handleTitleClick(song.id, i);
+                      this.handleTitleClick(song.song_id, i);
                     }}
                   >
-                    {song.title} - {song.artist}
+                    {song.title}
+                    {song.song_id >= 0 ? " - " + song.artist : ""}
                   </Button>
                 </h3>
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "space-around",
-                    alignItems: "center",
-                  }}
-                >
-                  {/*
-                  <Tooltip title="Like">
-                    <Button>
-                      <StarIcon fontSize="small" color="secondary" />
-                    </Button>
-                  </Tooltip>
-                  */}
-                  <Edit
-                    currentId={this.state.currentId}
-                    handleClose={this.handleClose}
-                    handleClickOpen={this.handleClickOpen}
-                    id={song.id}
-                    open={this.state.open}
-                    type="video"
-                  />
-                  <Delete
-                    delete={this.props.deleteSong}
-                    getData={this.props.getSongs}
-                    id={song.id}
-                  />
-                </div>
+                {song.song_id >= 0 ? (
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "space-around",
+                      alignItems: "center",
+                    }}
+                  >
+                    {/*
+                    <Tooltip title="Like">
+                      <Button>
+                        <StarIcon fontSize="small" color="secondary" />
+                      </Button>
+                    </Tooltip>
+                    */}
+                    <Edit
+                      currentId={this.state.currentId}
+                      handleClose={this.handleClose}
+                      handleClickOpen={this.handleClickOpen}
+                      id={song.song_id}
+                      open={this.state.open}
+                      type="video"
+                    />
+                    <Delete
+                      delete={this.props.deleteSong}
+                      getData={this.props.getSongs}
+                      id={song.song_id}
+                    />
+                  </div>
+                ) : (
+                  ""
+                )}
                 <hr />
               </DialogContent>
             ))

@@ -2,8 +2,8 @@ import React from "react";
 import {connect} from "react-redux";
 import MusicVideoIcon from "@material-ui/icons/MusicVideo";
 import QueueMusicIcon from "@material-ui/icons/QueueMusic";
-import StarsIcon from "@material-ui/icons/Stars";
-import StarIcon from "@material-ui/icons/Star";
+// import StarsIcon from "@material-ui/icons/Stars";
+// import StarIcon from "@material-ui/icons/Star";
 import PhonelinkEraseIcon from "@material-ui/icons/PhonelinkErase";
 import QueuePlayNextIcon from "@material-ui/icons/QueuePlayNext";
 import PlaylistAddIcon from "@material-ui/icons/PlaylistAdd";
@@ -13,6 +13,7 @@ import Dialog from "@material-ui/core/Dialog";
 import Button from "@material-ui/core/Button";
 import Tooltip from "@material-ui/core/Tooltip";
 import CurrentSong from "../components/CurrentSong";
+import CurrentPlaylist from "../components/CurrentPlaylist";
 import SongList from "../components/lists/SongList";
 import Playlist from "../components/lists/Playlist";
 import AddVideoForm from "../components/forms/AddVideoForm";
@@ -21,7 +22,6 @@ import AddPlaylistForm from "../components/forms/AddPlaylistForm";
 const navTitle = {
   songsEvent: "Songs List",
   playlistsEvent: "Playlists",
-  favoritesEvent: "Favorites",
 };
 
 class Navbar extends React.Component {
@@ -29,7 +29,6 @@ class Navbar extends React.Component {
     currentEvent: "songsEvent",
     songsEvent: true,
     playlistsEvent: false,
-    favoritesEvent: false,
     videoFormOpen: false,
     songListOpen: false,
     playlistsOpen: false,
@@ -42,10 +41,6 @@ class Navbar extends React.Component {
 
   handlePlaylists = async value => {
     await this.setState({playlistsEvent: value});
-  };
-
-  handleFavorites = async value => {
-    await this.setState({favoritesEvent: value});
   };
 
   handleLogout = () => {
@@ -80,12 +75,7 @@ class Navbar extends React.Component {
 
   render() {
     const {user} = this.props;
-    const {
-      currentEvent,
-      songsEvent,
-      playlistsEvent,
-      favoritesEvent,
-    } = this.state;
+    const {currentEvent, songsEvent, playlistsEvent} = this.state;
     return (
       <div
         style={{
@@ -109,7 +99,6 @@ class Navbar extends React.Component {
                 this.setState({currentEvent: "songsEvent"});
                 await this.handleSongs(true);
                 await this.handlePlaylists(false);
-                await this.handleFavorites(false);
               }}
             >
               <MusicVideoIcon color="secondary" />
@@ -121,22 +110,9 @@ class Navbar extends React.Component {
                 this.setState({currentEvent: "playlistsEvent"});
                 await this.handleSongs(false);
                 await this.handlePlaylists(true);
-                await this.handleFavorites(false);
               }}
             >
               <QueueMusicIcon color="secondary" />
-            </Button>
-          </Tooltip>
-          <Tooltip title="Favorites">
-            <Button
-              onClick={async () => {
-                this.setState({currentEvent: "favoritesEvent"});
-                await this.handleSongs(false);
-                await this.handlePlaylists(false);
-                await this.handleFavorites(true);
-              }}
-            >
-              <StarsIcon color="secondary" />
             </Button>
           </Tooltip>
           <Tooltip title="Logout">
@@ -174,7 +150,7 @@ class Navbar extends React.Component {
               </Dialog>
               <CurrentSong />
             </>
-          ) : playlistsEvent ? (
+          ) : (
             <>
               <Tooltip title="View Playlists">
                 <Button onClick={() => this.handleClickPlaylistsOpen()}>
@@ -200,15 +176,8 @@ class Navbar extends React.Component {
               >
                 <AddPlaylistForm clickSubmit={this.handleClose} />
               </Dialog>
+              <CurrentPlaylist />
             </>
-          ) : favoritesEvent ? (
-            <Tooltip title="Add Like">
-              <Button>
-                <StarIcon fontSize="small" color="secondary" />
-              </Button>
-            </Tooltip>
-          ) : (
-            ""
           )}
         </div>
       </div>

@@ -117,13 +117,24 @@ export const signup = (username, email, password) => dispatch => {
 
 const setAuthorizationHeader = token => {
   const authToken = token;
+  // authentication
   localStorage.setItem("authToken", authToken);
   localStorage.setItem("isAuthenticated", "true");
+  // add new song
   localStorage.setItem("isUpdated", "false")
   localStorage.setItem("title", "");
   localStorage.setItem("artist", "");
   localStorage.setItem("video_link", "");
+  // play song
   localStorage.setItem("currentIndex", 0);
   localStorage.setItem("songId", "");
+  localStorage.setItem("songTitle", "");
   localStorage.setItem("videoId", "");
+  // play song from playlist
+  localStorage.setItem("currentPlaylist", 0);
+  localStorage.setItem("currentPlaylistSongIndex", 0);
+  localStorage.setItem("playlistSongsId", "");
+  localStorage.setItem("playlistSongId", "");
+  localStorage.setItem("playlistSongTitle", "");
+  localStorage.setItem("playlistVideoId", "");
 };

@@ -2,9 +2,9 @@ import React from "react";
 import {connect} from "react-redux";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
-import {addPlaylist} from "../../redux/actions/playlistAction";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogActions from "@material-ui/core/DialogActions";
+import {addPlaylist} from "../../redux/actions/playlistAction";
 
 class AddPlaylistForm extends React.Component {
   state = {
@@ -14,7 +14,7 @@ class AddPlaylistForm extends React.Component {
 
   // componentDidMount() {
   //   this.interval = setInterval(this.handleStorageToState, 100);
-    // window.addEventListener("storage", this.handleStorageToState);
+  // window.addEventListener("storage", this.handleStorageToState);
   // }
 
   // componentWillUnmount() {
@@ -34,10 +34,10 @@ class AddPlaylistForm extends React.Component {
     this.setState({[prop]: e.target.value});
   };
 
-  submit = (name) => {
+  submit = name => {
     this.props.addPlaylist(name);
-    localStorage.setItem("playlistName", "");
-    return this.props.clickSubmit();
+    // localStorage.setItem("playlistName", "");
+    this.props.clickSubmit();
   };
 
   // handleStorageToState = () => {
@@ -85,7 +85,7 @@ class AddPlaylistForm extends React.Component {
 }
 
 const mapDispatchToProps = {
-  addPlaylist: (name) => addPlaylist(name),
+  addPlaylist: name => addPlaylist(name),
 };
 
 export default connect(
