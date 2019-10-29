@@ -5,7 +5,7 @@
 3. Play saved playlist or songs on any computer (as long as the chrome extension is installed)
 
 ## Technologies used
-* Frontend: React, Redux, Material-ui, Chrome API
+* Frontend: React, Redux, Material-ui, Chrome API, Youtube API
 * Backend: NodeJS, Express, PostgreSQL
 
 ## How to use
