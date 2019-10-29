@@ -7,6 +7,8 @@
 ## Technologies used
 * React, Redux, Express, PostgreSQL
 
-## Chrome Web Store : https://chrome.google.com/webstore/detail/mvpplaylist/ahlbpejoldepcdidbijooihlmkgokoil
+## Chrome Web Store
+* https://chrome.google.com/webstore/detail/mvpplaylist/ahlbpejoldepcdidbijooihlmkgokoil
 
-## Backend server link : https://github.com/reshinto/mvp_playlist_server
+## Backend server link
+* https://github.com/reshinto/mvp_playlist_server
