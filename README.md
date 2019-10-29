@@ -12,3 +12,7 @@
 
 ## Backend server link
 * https://github.com/reshinto/mvp_playlist_server
+
+## Sample Images
+![Player](./images/player.png)
+![Login](./images/login.png)
