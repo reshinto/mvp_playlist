@@ -5,7 +5,8 @@
 3. Play saved playlist or songs on any computer (as long as the chrome extension is installed)
 
 ## Technologies used
-* React, Redux, Express, PostgreSQL
+* Frontend: React, Redux, 
+* Backend: Express, PostgreSQL
 
 ## How to use
 1. Option 1
