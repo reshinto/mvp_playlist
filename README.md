@@ -7,6 +7,10 @@
 ## Technologies used
 * React, Redux, Express, PostgreSQL
 
+## Special feature
+* Right click anywhere on a website that is not on the video, and click Add Video to auto add video to app
+![Click](./images/click.png)
+
 ## Chrome Web Store
 * https://chrome.google.com/webstore/detail/mvpplaylist/ahlbpejoldepcdidbijooihlmkgokoil
 
