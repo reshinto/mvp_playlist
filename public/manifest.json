@@ -1,6 +1,11 @@
 {
   "name": "mvp_playlist",
   "version": "1.0",
+  "icons": {
+    "16": "mvp_playlistIcon16.png",
+    "48": "mvp_playlistIcon48.png",
+    "128": "mvp_playlistIcon128.png"
+  },
   "manifest_version": 2,
   "browser_action": {},
   "background": {
