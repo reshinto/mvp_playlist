@@ -31,7 +31,7 @@
   * This will install this chrome extension to your chrome browser
   * Once installed, you can use it straight away as it has already been configured to connect to the live backend server
 ### Option 2
-  * Go to Chromw Web Store and download (currently in test mode, so no one can download it at the moment)
+  * Go to Chrome Web Store and download (currently in test mode, so no one can download it at the moment)
     * link at the bottom
 
 ## Special feature
