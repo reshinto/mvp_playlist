@@ -50,4 +50,4 @@
 
 ## Credits
 * Used hk-skit's chrome-extension-starter-kit for basic starter boilerplate template.
-    *https://github.com/hk-skit/chrome-extension-starter-kit
+  * https://github.com/hk-skit/chrome-extension-starter-kit
