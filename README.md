@@ -5,7 +5,7 @@
 3. Play saved playlist or songs on any computer (as long as the chrome extension is installed)
 
 ## Technologies used
-* Frontend: React, Redux, 
+* Frontend: React, Redux,
 * Backend: Express, PostgreSQL
 
 ## How to use
@@ -43,6 +43,8 @@
 
 ## Backend server link
 * https://github.com/reshinto/mvp_playlist_server
+* ERD
+![ERD](./images/MVP_Playlist_ERD.png)
 
 ## Sample Images
 ![Player](./images/player.png)
