@@ -5,13 +5,8 @@
 3. Play saved playlist or songs on any computer (as long as the chrome extension is installed)
 
 ## Technologies used
-<<<<<<< HEAD
-* Frontend: React, Redux,
-* Backend: Express, PostgreSQL
-=======
 * Frontend: React, Redux, Material-ui, Chrome API, Youtube API
 * Backend: NodeJS, Express, PostgreSQL
->>>>>>> b1848ccb1d5e3a7608a1ca1951232f2818cd49a4
 
 ## How to use
 ### Option 1
@@ -48,13 +43,10 @@
 
 ## Backend server link
 * https://github.com/reshinto/mvp_playlist_server
-<<<<<<< HEAD
 * ERD
 ![ERD](./images/MVP_Playlist_ERD.png)
-=======
 * Please note that the live backend server is runned on Heroku
   * Therefore, if it is in sleep mode, it might take a while for it to respond initially before waking up.
->>>>>>> b1848ccb1d5e3a7608a1ca1951232f2818cd49a4
 
 ## Sample Images
 ![Player](./images/player.png)
