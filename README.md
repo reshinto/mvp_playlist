@@ -3,6 +3,8 @@
 ## Overview
 MVP Playlist is a Chrome extension built with React and Redux that lets you collect YouTube music videos into personal queues you can play from any computer after signing in. The extension opens a standalone player UI (`src/App.js`) that drives the experience with Material-UI controls and `react-chrome-extension-router` navigation between the login/register views (`src/pages/Login.js`, `src/pages/Register.js`) and the authenticated home screen (`src/pages/Home.js`). A hosted REST API at `https://mvp-playlist-server.herokuapp.com` (configured in `src/redux/utility.js`) handles authentication, user data, and persistence of songs and playlists.
 
+![mvp](./images/demo.gif)
+
 ## Key Features
 - **Account management** – Users can register and log in through `LoginForm` (`src/components/forms/LoginForm.js`), which dispatches Redux actions in `src/redux/actions/authAction.js` to request tokens from the backend and stores them with helper utilities in `src/redux/utility.js`.
 - **Song library** – Once authenticated, the `Navbar` component (`src/components/Navbar.js`) loads the current user via `src/redux/actions/userAction.js` and surfaces dialogs for browsing (`src/components/lists/SongList.js`), adding (`src/components/forms/AddVideoForm.js`), editing (`src/components/forms/EditVideoForm.js`), and deleting songs (`src/components/controls/Delete.js`). Playback is powered by the `CurrentSong` player (`src/components/CurrentSong.js`), which streams YouTube videos with transport controls (`src/components/controls/*.js`).
